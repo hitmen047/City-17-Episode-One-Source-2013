@@ -1,0 +1,80 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Combos
+// DYNAMIC: "PIXELFOGTYPE"		"0..1"
+// DYNAMIC: "WRITEWATERFOGTODESTALPHA"		"0..1"
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+sampler _Sampler_01		: register( s1 );
+
+// Constants
+const float _g_Time		: register( c16 );
+const float4 g_cData_sun_data		: register( c17 ); 		// Callback
+const float g_cData_Mutable_01		: register( c18 ); 		// Mutable
+
+// Arrays
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+	float4 vTexCoord_1			:	TEXCOORD1;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+	float vDepth				:	DEPTH;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float _var0 = _g_Time * float( 0.400000 );
+	float _var1 = g_cData_sun_data.z;
+	float2 _var2 = In.vTexCoord_1.xy;
+	float _var3 = In.vTexCoord_1.w;
+	float2 _var4;
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float2 scale_def = float2( 1.0f, 1.0f );
+		float2 trans_def = float2( 0.0f, 0.0f );
+		float fs = sin( _var0 );
+		float fc = cos( _var0 );
+		float4 row_0 = float4( fc * scale_def.x, -fs * scale_def.x, 0, ( -center_def.x * fc + center_def.y * fs ) * scale_def.x + center_def.x + trans_def.x );
+		float4 row_1 = float4( fs * scale_def.y, fc * scale_def.y, 0, ( -center_def.x * fs - center_def.y * fc ) * scale_def.y + center_def.y + trans_def.y );
+		_var4.x = dot( float4( In.vTexCoord_0, 0, 1 ), row_0 );
+		_var4.y = dot( float4( In.vTexCoord_0, 0, 1 ), row_1 );
+	}
+	_var1 = smoothstep( float( 1.000000 ), float( 0.800000 ), _var1 );
+	_var2 = _var2 / _var3;
+	float3 _var5 = tex2D( _Sampler_00, _var4 ).rgb;
+	_var2 = _var2 * float2( 0.500000, -0.500000 );
+	float3 _var6 = _var5 * float( 0.850000 );
+	_var2 = _var2 + float( 0.500000 );
+	_var6 = lerp( _var5, _var6, _var1 );
+	float _var7 = tex2D( _Sampler_01, _var2 ).a;
+	_var6 = _var6 * float( 0.250000 );
+	_var7 = 1.0f - _var7;
+	_var6 = _var6 * g_cData_Mutable_01;
+	_var7 = _var7 * float( 10.550000 );
+	_var7 = 1.0f - _var7;
+	_var6 = _var6 * _var7;
+	float4 _var8 = float4( _var6.x, _var6.y, _var6.z, 1.000000 );
+	_var8 = FinalOutput( _var8, float( 0.000000 ), PIXELFOGTYPE, TONEMAP_SCALE_LINEAR, false, 1.0f );
+	Out.vColor_0 = _var8;
+	Out.vDepth = float( 0.999999 );
+	return Out;
+}

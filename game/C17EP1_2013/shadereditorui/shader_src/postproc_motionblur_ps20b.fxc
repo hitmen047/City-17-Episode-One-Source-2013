@@ -1,0 +1,90 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Combos
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+sampler _Sampler_01		: register( s1 );
+
+// Constants
+const float4 g_cData_inv_viewproj_1		: register( c16 ); 		// Callback
+const float4 g_cData_inv_viewproj_2		: register( c17 ); 		// Callback
+const float4 g_cData_inv_viewproj_3		: register( c18 ); 		// Callback
+const float4 g_cData_inv_viewproj_4		: register( c19 ); 		// Callback
+const float4 g_cData_prev_viewproj_1		: register( c20 ); 		// Callback
+const float4 g_cData_prev_viewproj_2		: register( c21 ); 		// Callback
+const float4 g_cData_prev_viewproj_3		: register( c22 ); 		// Callback
+const float4 g_cData_prev_viewproj_4		: register( c23 ); 		// Callback
+const float g_cData_framescale		: register( c24 ); 		// Callback
+
+// Arrays
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float3 _var0 = tex2D( _Sampler_00, In.vTexCoord_0 ).rgb;
+	float _var1 = In.vTexCoord_0.x;
+	float _var2 = In.vTexCoord_0.y;
+	float _var3 = tex2D( _Sampler_01, In.vTexCoord_0 ).a;
+	float4x4 _var4 = { g_cData_inv_viewproj_1,
+				g_cData_inv_viewproj_2,
+				g_cData_inv_viewproj_3,
+				g_cData_inv_viewproj_4 };
+	float4x4 _var5 = { g_cData_prev_viewproj_1,
+				g_cData_prev_viewproj_2,
+				g_cData_prev_viewproj_3,
+				g_cData_prev_viewproj_4 };
+	float _var6 = float( 3250.000000 ) * g_cData_framescale;
+	float3 _var7 = _var0;
+	_var1 = _var1 * float( 2.000000 );
+	_var2 = 1.0f - _var2;
+	_var3 = _var3 * float( 10.000000 );
+	_var6 = float( -3500.000000 ) + _var6;
+	_var1 = _var1 - float( 1.000000 );
+	_var2 = _var2 * float( 2.000000 );
+	_var3 = clamp( _var3, float( 0.000000 ), float( 1.000000 ) );
+	_var2 = _var2 - float( 1.000000 );
+	float2 _var8 = float2( _var1, _var2 );
+	float3 _var9 = float3( _var8, _var3 );
+	float4 _var10 = float4( _var9.x, _var9.y, _var9.z, 1.000000 );
+	float4 _var11 = mul( _var10, _var4 );
+	_var11 = mul( _var11, _var5 );
+	_var11 = _var10 - _var11;
+	float2 _var12 = _var11.xy;
+	_var12 = _var12 / _var6;
+	float2 _var13 = _var12;
+	float2 _var14 = In.vTexCoord_0 + _var13;
+	float2 _var15 = _var14;
+	for ( int _var16 = 1; _var16 < 15; _var16++ )
+	{
+		_var15 = _var15 + _var13;
+		float3 _var17 = tex2D( _Sampler_00, _var15 ).rgb;
+		_var7 = _var7 + _var17;
+	}
+	_var7 = _var7 / float( 15.000000 );
+	float4 _var18 = float4( _var7.x, _var7.y, _var7.z, 1.000000 );
+	Out.vColor_0 = _var18;
+	return Out;
+}

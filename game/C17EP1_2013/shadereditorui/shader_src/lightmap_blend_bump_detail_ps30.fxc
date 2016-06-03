@@ -1,0 +1,195 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Combos
+// DYNAMIC: "PIXELFOGTYPE"		"0..1"
+// DYNAMIC: "FLASHLIGHT"		"0..1"
+// DYNAMIC: "FLASHLIGHTDEPTHFILTERMODE"		"0..2"
+// DYNAMIC: "FLASHLIGHTSHADOWS"		"0..1"
+// DYNAMIC: "WRITEWATERFOGTODESTALPHA"		"0..1"
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+sampler _Sampler_01		: register( s1 );
+sampler _Sampler_02		: register( s2 );
+sampler _Sampler_03		: register( s3 );
+sampler _Sampler_04		: register( s4 );
+sampler _Sampler_05		: register( s5 );
+sampler _Sampler_06		: register( s6 );
+sampler _Sampler_07		: register( s7 );
+sampler _Sampler_08		: register( s8 );
+sampler _Sampler_09		: register( s9 );
+sampler _Sampler_10		: register( s10 );
+sampler _gSampler_Flashlight_Cookie		: register( s11 );
+sampler _gSampler_Flashlight_Depth		: register( s12 );
+sampler _gSampler_Flashlight_Random		: register( s13 );
+
+// Constants
+const float4x4 g_cFlashlightWorldToTexture		: register( c12 );
+const float2 g_cData_base_detail_0_smoothing		: register( c16 ); 		// Static
+const float2 g_cData_base_detail_1_smoothing		: register( c17 ); 		// Static
+const float3 _g_VecOrig		: register( c18 );
+const float3 g_cData_envmap_tint		: register( c19 ); 		// Static
+const float4 _g_FogParams		: register( c20 );
+const float4 g_cFlashlightAttenuationFactors		: register( c8 );
+const float4 g_cFlashlightPos		: register( c9 );
+const float4 g_cShadowTweaks		: register( c7 );
+
+// Semantic structures
+struct PS_INPUT
+{
+	float4 vTexCoord_0			:	TEXCOORD0;
+	float4 vTexCoord_1			:	TEXCOORD1;
+	float3 vTexCoord_2			:	TEXCOORD2;
+	float3 vTexCoord_3			:	TEXCOORD3;
+	float4 vTexCoord_4			:	TEXCOORD4;
+	float3 vTexCoord_5			:	TEXCOORD5;
+	float3 vTexCoord_6			:	TEXCOORD6;
+	float2 vTexCoord_7			:	TEXCOORD7;
+	float4 vColor_0				:	COLOR0;
+	float4 vColor_1				:	COLOR1;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float3 _var0 = float3( 0.000000, 0.000000, 0.000000 );
+	float2 _var1 = In.vTexCoord_0.xy;
+	float2 _var2 = In.vTexCoord_4.zw;
+	float _var3 = In.vColor_1.w;
+	float2 _var4 = In.vTexCoord_0.zw;
+	float2 _var5 = In.vTexCoord_4.xy;
+	float _var6 = g_cData_base_detail_0_smoothing.x;
+	float _var7 = g_cData_base_detail_0_smoothing.y;
+	float2 _var8 = In.vTexCoord_7.xy;
+	float _var9 = g_cData_base_detail_1_smoothing.x;
+	float _var10 = g_cData_base_detail_1_smoothing.y;
+	float3 _var11 = float3( 0.000000, 0.000000, 0.000000 );
+	float _var12 = _g_VecOrig.z;
+	float _var13 = In.vTexCoord_3.z;
+	float _var14 = In.vColor_0.z;
+	float4 _texLookup_50 = tex2D( _Sampler_00, _var1 );
+	float3 _var15 = _texLookup_50.rgb;
+	float _var16 = _texLookup_50.b;
+	float _var17 = _texLookup_50.a;
+	float3 _var18 = tex2D( _Sampler_01, _var2 ).rgb;
+	float4 _texLookup_54 = tex2D( _Sampler_02, _var1 );
+	float3 _var19 = _texLookup_54.rgb;
+	float _var20 = _texLookup_54.b;
+	float _var21 = _texLookup_54.a;
+	float3 _var22 = tex2D( _Sampler_03, _var2 ).rgb;
+	float4 _texLookup_58 = tex2D( _Sampler_04, _var4 );
+	float _var23 = _texLookup_58.r;
+	float _var24 = _texLookup_58.g;
+	float3 _var25 = tex2D( _Sampler_05, _var1 ).rgb;
+	float3 _var26 = tex2D( _Sampler_06, _var8 ).rgb;
+	float4 _texLookup_62 = tex2D( _Sampler_07, _var1 );
+	float3 _var27 = _texLookup_62.rgb;
+	float _var28 = _texLookup_62.g;
+	float3 _var29 = tex2D( _Sampler_08, _var8 ).rgb;
+	_var12 = CalcPixelFogFactor( PIXELFOGTYPE, _g_FogParams, _var12, _var13, _var14 );
+	float2 _var30 = _var15.xy;
+	float2 _var31 = _var18.xy;
+	float2 _var32 = _var19.xy;
+	float2 _var33 = _var22.xy;
+	_var23 = min( _var3, _var23 );
+	_var24 = max( _var3, _var24 );
+	_var26 = smoothstep( _var6, _var7, _var26 );
+	_var29 = smoothstep( _var9, _var10, _var29 );
+	_var31 = _var31 - float( 0.500000 );
+	_var33 = _var33 - float( 0.500000 );
+	_var23 = lerp( _var23, _var24, _var3 );
+	_var25 = _var25 * _var26;
+	_var27 = _var27 * _var29;
+	_var30 = _var30 + _var31;
+	_var32 = _var32 + _var33;
+	_var23 = smoothstep( float( 0.400000 ), float( 0.600000 ), _var23 );
+	_var30 = saturate( _var30 );
+	_var32 = saturate( _var32 );
+	_var25 = lerp( _var25, _var27, _var23 );
+	_var17 = lerp( _var17, _var21, _var23 );
+	_var28 = _var28 * _var23;
+	float3 _var34 = float3( _var30, _var16 );
+	float3 _var35 = float3( _var32, _var20 );
+	_var34 = lerp( _var34, _var35, _var23 );
+	_var34 = _var34 * float( 2.000000 );
+	_var34 = _var34 - float( 1.000000 );
+#if ( FLASHLIGHT == 0 )
+		float2 _var36 = In.vTexCoord_1.xy;
+		float _var37 = dot( _var34, bumpBasis[0] );
+		float _var38 = dot( _var34, bumpBasis[1] );
+		float _var39 = dot( _var34, bumpBasis[2] );
+		float2 _var40 = In.vTexCoord_1.zw;
+		float3 _var41 = tex2D( _Sampler_09, _var5 ).rgb;
+		float3 _var42 = In.vTexCoord_3 - _g_VecOrig;
+		float3 _var43 = lerp( _var34, In.vTexCoord_2, float( 0.800000 ) );
+		float3 _var44 = tex2D( _Sampler_09, _var36 ).rgb;
+		float2 _var45 = float2( _var37, _var38 );
+		float3 _var46 = tex2D( _Sampler_09, _var40 ).rgb;
+		_var42 = reflect( _var42, _var43 );
+		float3 _var47 = float3( _var45, _var39 );
+		float3 _var48 = texCUBE( _Sampler_10, _var42 ).rgb;
+		_var47 = saturate( _var47 );
+		_var48 = _var48 * float( 0.040000 );
+		_var47 = _var47 * _var47;
+		_var48 = _var48 * ENV_MAP_SCALE;
+		float _var49 = _var47.x;
+		float _var50 = _var47.y;
+		float _var51 = _var47.z;
+		float _var52 = dot( float3( float( 1.000000 ), float( 1.000000 ), float( 1.000000 ) ), _var47 );
+		_var48 = _var48 * _var17;
+		_var44 = _var44 * _var49;
+		_var46 = _var46 * _var50;
+		_var41 = _var41 * _var51;
+		_var52 = LIGHT_MAP_SCALE / _var52;
+		_var48 = _var48 * g_cData_envmap_tint;
+		_var44 = _var44 + _var46;
+		_var11 = _var48;
+		_var44 = _var44 + _var41;
+		_var44 = _var44 * _var52;
+		_var0 = _var44;
+#endif
+#if ( FLASHLIGHT == 1 )
+		float3x3 _var53 = { In.vTexCoord_5,
+					In.vTexCoord_6,
+					In.vTexCoord_2 };
+		float4 _var54 = mul( float4(In.vTexCoord_3.xyz,1), g_cFlashlightWorldToTexture );
+		float2 _var55 = In.vColor_0.xy;
+		float _var56 = In.vColor_0.w;
+		float3 _var57 = mul( _var34, _var53 );
+		_var55 = _var55 / _var56;
+		_var57 = normalize( _var57 );
+		_var55 = _var55 * float( 0.500000 );
+		_var57 = lerp( _var57, In.vTexCoord_2, float( 0.100000 ) );
+		_var55 = _var55 + float( 0.500000 );
+		_var57 = DoFlashlight( g_cFlashlightPos.xyz, In.vTexCoord_3, _var54, _var57,
+				g_cFlashlightAttenuationFactors.xyz, g_cFlashlightAttenuationFactors.w,
+				_gSampler_Flashlight_Cookie, _gSampler_Flashlight_Depth, _gSampler_Flashlight_Random,
+				FLASHLIGHTDEPTHFILTERMODE, FLASHLIGHTSHADOWS, true,
+				_var55, false, g_cShadowTweaks );
+		_var0 = _var57;
+#endif
+	_var0 = _var0;
+	_var11 = _var11 * _var28;
+	_var0 = _var0 * _var25;
+	_var0 = _var0 + _var11;
+	float4 _var58 = float4( _var0.x, _var0.y, _var0.z, 1.000000 );
+	_var58 = FinalOutput( _var58, _var12, PIXELFOGTYPE, TONEMAP_SCALE_LINEAR, true, _var14 );
+	Out.vColor_0 = _var58;
+	return Out;
+}

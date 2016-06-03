@@ -1,0 +1,119 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+
+
+// Combos
+// DYNAMIC: "PIXELFOGTYPE"		"0..1"
+// STATIC: "FLASHLIGHT"		"0..1"
+// STATIC: "FLASHLIGHTDEPTHFILTERMODE"		"0..2"
+// DYNAMIC: "FLASHLIGHTSHADOWS"		"0..1"
+// DYNAMIC: "WRITEWATERFOGTODESTALPHA"		"0..1"
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+sampler _Sampler_01		: register( s1 );
+sampler _Sampler_02		: register( s2 );
+sampler _gSampler_Flashlight_Cookie		: register( s3 );
+sampler _gSampler_Flashlight_Depth		: register( s4 );
+sampler _gSampler_Flashlight_Random		: register( s5 );
+
+// Constants
+const float4x4 g_cFlashlightWorldToTexture		: register( c15 );
+const float4 _g_FogParams		: register( c0 );
+const float3 _g_VecOrig		: register( c1 );
+const float4 g_cFlashlightAttenuationFactors		: register( c22 );
+const float4 g_cFlashlightPos		: register( c23 );
+const float4 g_cShadowTweaks		: register( c21 );
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+	float4 vTexCoord_1			:	TEXCOORD1;
+	float3 vTexCoord_2			:	TEXCOORD2;
+	float3 vTexCoord_3			:	TEXCOORD3;
+	float2 vTexCoord_4			:	TEXCOORD4;
+	float3 vTexCoord_5			:	TEXCOORD5;
+	float3 vTexCoord_6			:	TEXCOORD6;
+	float4 vColor_0				:	COLOR0;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float3 _var0 = float3( 0.000000, 0.000000, 0.000000 );
+	float3 _var1 = tex2D( _Sampler_00, In.vTexCoord_0 ).rgb;
+	float3 _var2 = tex2D( _Sampler_01, In.vTexCoord_0 ).rgb;
+	float _var3 = _g_VecOrig.z;
+	float _var4 = In.vTexCoord_3.z;
+	float _var5 = In.vColor_0.z;
+	_var1 = _var1 * float( 2.000000 );
+	_var3 = CalcPixelFogFactor( PIXELFOGTYPE, _g_FogParams, _var3, _var4, _var5 );
+	_var1 = _var1 - float( 1.000000 );
+#if ( FLASHLIGHT == 0 )
+		float2 _var6 = In.vTexCoord_1.xy;
+		float _var7 = dot( _var1, bumpBasis[0] );
+		float _var8 = dot( _var1, bumpBasis[1] );
+		float _var9 = dot( _var1, bumpBasis[2] );
+		float2 _var10 = In.vTexCoord_1.zw;
+		float3 _var11 = tex2D( _Sampler_02, In.vTexCoord_4 ).rgb;
+		float3 _var12 = tex2D( _Sampler_02, _var6 ).rgb;
+		_var7 = saturate( _var7 );
+		_var8 = saturate( _var8 );
+		_var9 = saturate( _var9 );
+		float3 _var13 = tex2D( _Sampler_02, _var10 ).rgb;
+		float2 _var14 = float2( _var7, _var8 );
+		float3 _var15 = float3( _var14, _var9 );
+		_var15 = _var15 * _var15;
+		float _var16 = _var15.x;
+		float _var17 = _var15.y;
+		float _var18 = _var15.z;
+		float _var19 = dot( float3( float( 1.000000 ), float( 1.000000 ), float( 1.000000 ) ), _var15 );
+		_var12 = _var12 * _var16;
+		_var13 = _var13 * _var17;
+		_var11 = _var11 * _var18;
+		_var19 = LIGHT_MAP_SCALE / _var19;
+		_var12 = _var12 + _var13;
+		_var12 = _var12 + _var11;
+		_var12 = _var12 * _var19;
+		_var0 = _var12;
+#endif
+#if ( FLASHLIGHT == 1 )
+		float3x3 _var20 = { In.vTexCoord_5,
+					In.vTexCoord_6,
+					In.vTexCoord_2 };
+		float4 _var21 = mul( float4(In.vTexCoord_3.xyz,1), g_cFlashlightWorldToTexture );
+		float2 _var22 = In.vColor_0.xy;
+		float _var23 = In.vColor_0.w;
+		float3 _var24 = mul( _var1, _var20 );
+		_var22 = _var22 / _var23;
+		_var24 = normalize( _var24 );
+		_var22 = _var22 * float( 0.500000 );
+		_var22 = _var22 + float( 0.500000 );
+		_var24 = DoFlashlight( g_cFlashlightPos.xyz, In.vTexCoord_3, _var21, _var24,
+				g_cFlashlightAttenuationFactors.xyz, g_cFlashlightAttenuationFactors.w,
+				_gSampler_Flashlight_Cookie, _gSampler_Flashlight_Depth, _gSampler_Flashlight_Random,
+				FLASHLIGHTDEPTHFILTERMODE, FLASHLIGHTSHADOWS, true,
+				_var22, false, g_cShadowTweaks );
+		_var0 = _var24;
+#endif
+	_var0 = _var0;
+	_var0 = _var0 * _var2;
+	float4 _var25 = float4( _var0.x, _var0.y, _var0.z, 1.000000 );
+	_var25 = FinalOutput( _var25, _var3, PIXELFOGTYPE, TONEMAP_SCALE_LINEAR, true, _var5 );
+	Out.vColor_0 = _var25;
+	return Out;
+}

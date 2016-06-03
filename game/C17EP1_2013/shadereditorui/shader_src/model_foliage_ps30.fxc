@@ -1,0 +1,75 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Combos
+// DYNAMIC: "NUM_LIGHTS"		"0..4"
+// DYNAMIC: "PIXELFOGTYPE"		"0..1"
+// DYNAMIC: "WRITEWATERFOGTODESTALPHA"		"0..1"
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+sampler _Sampler_01		: register( s1 );
+
+// Constants
+const float3 _g_VecOrig		: register( c16 );
+const float4 _g_FogParams		: register( c17 );
+const float3 g_cAmbientCube[6]		: register( c0 );
+PixelShaderLightInfo g_cLightInfo[3]		: register( c6 );
+
+// Arrays
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+	float3 vTexCoord_1			:	TEXCOORD1;
+	float3 vTexCoord_2			:	TEXCOORD2;
+	float4 vTexCoord_3			:	TEXCOORD3;
+	float4 vColor_0				:	COLOR0;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float4 _texLookup_12 = tex2D( _Sampler_00, In.vTexCoord_0 );
+	float3 _var0 = _texLookup_12.rgb;
+	float _var1 = _texLookup_12.a;
+	float3 _var2 = float3( 1.000000, 1.000000, 1.000000 );
+	float3 _var3 = normalize( _g_VecOrig );
+	float _var4 = tex2D( _Sampler_01, In.vTexCoord_0 ).r;
+	float _var5 = _g_VecOrig.z;
+	float _var6 = In.vTexCoord_1.z;
+	float _var7 = In.vTexCoord_3.z;
+	float3 _var8 = PixelShaderDoLighting( In.vTexCoord_1, In.vTexCoord_2, float3(0,0,0),
+			false, true, In.vColor_0,
+			g_cAmbientCube, NUM_LIGHTS, g_cLightInfo,
+			true, true, _var1 );
+	float _var9 = dot( _var2, In.vTexCoord_2 );
+	_var3 = _var3 * float( -1.000000 );
+	_var5 = CalcPixelFogFactor( PIXELFOGTYPE, _g_FogParams, _var5, _var6, _var7 );
+	float _var10 = dot( _var2, _var3 );
+	_var9 = _var9 * _var10;
+	_var9 = clamp( _var9, float( 0.000000 ), float( 1.000000 ) );
+	_var9 = _var9 * _var4;
+	_var8 = _var8 + _var9;
+	_var0 = _var0 * _var8;
+	float4 _var11 = float4( _var0, _var1 );
+	_var11 = FinalOutput( _var11, _var5, PIXELFOGTYPE, TONEMAP_SCALE_LINEAR, false, 1.0f );
+	Out.vColor_0 = _var11;
+	return Out;
+}

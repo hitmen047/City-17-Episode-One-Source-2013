@@ -1,0 +1,50 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Combos
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+sampler _Sampler_01		: register( s1 );
+
+// Constants
+const float3 g_cData_lutsize		: register( c16 ); 		// Static
+
+// Arrays
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float3 _var0 = tex2D( _Sampler_00, In.vTexCoord_0 ).rgb;
+	float3 _var1 = g_cData_lutsize - float( 1.000000 );
+	float3 _var2 = g_cData_lutsize * float( 2.000000 );
+	_var1 = _var1 / g_cData_lutsize;
+	_var2 = float( 1.000000 ) / _var2;
+	_var0 = _var0 * _var1;
+	_var0 = _var0 + _var2;
+	float3 _var3 = tex3D( _Sampler_01, _var0 ).rgb;
+	float4 _var4 = float4( _var3.x, _var3.y, _var3.z, 1.000000 );
+	Out.vColor_0 = _var4;
+	return Out;
+}

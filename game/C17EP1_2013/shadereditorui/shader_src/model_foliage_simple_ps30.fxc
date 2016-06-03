@@ -1,0 +1,57 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Combos
+// DYNAMIC: "PIXELFOGTYPE"		"0..1"
+// DYNAMIC: "WRITEWATERFOGTODESTALPHA"		"0..1"
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+
+// Constants
+const float4 _g_FogParams		: register( c16 );
+const float3 _g_VecOrig		: register( c17 );
+
+// Arrays
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+	float3 vTexCoord_1			:	TEXCOORD1;
+	float4 vTexCoord_2			:	TEXCOORD2;
+	float4 vColor_0				:	COLOR0;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float4 _texLookup_6 = tex2D( _Sampler_00, In.vTexCoord_0 );
+	float3 _var0 = _texLookup_6.rgb;
+	float _var1 = _texLookup_6.a;
+	float3 _var2 = In.vColor_0.xyz;
+	float _var3 = _g_VecOrig.z;
+	float _var4 = In.vTexCoord_1.z;
+	float _var5 = In.vTexCoord_2.z;
+	_var0 = _var0 * _var2;
+	_var3 = CalcPixelFogFactor( PIXELFOGTYPE, _g_FogParams, _var3, _var4, _var5 );
+	float4 _var6 = float4( _var0, _var1 );
+	_var6 = FinalOutput( _var6, _var3, PIXELFOGTYPE, TONEMAP_SCALE_LINEAR, false, 1.0f );
+	Out.vColor_0 = _var6;
+	return Out;
+}

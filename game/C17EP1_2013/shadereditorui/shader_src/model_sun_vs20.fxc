@@ -1,0 +1,49 @@
+// *********************************
+// ** auto generated vertexshader **
+// *********************************
+
+// Includes
+#include "common_vs_fxc.h"
+
+
+// Combos
+// DYNAMIC: "SKINNING"		"0..1"
+
+// Samplers
+
+// Constants
+
+// Arrays
+
+// Semantic structures
+struct VS_INPUT
+{
+	float3 vPos					:	POSITION;
+	float4 vBoneWeights			:	BLENDWEIGHT;
+	float4 vBoneIndices			:	BLENDINDICES;
+	float3 vNormal				:	NORMAL;
+	float2 vTexCoord_0			:	TEXCOORD0;
+};
+
+struct VS_OUTPUT
+{
+	float4 vProjPos				:	POSITION;
+	float2 vTexCoord_0			:	TEXCOORD0;
+	float4 vTexCoord_1			:	TEXCOORD1;
+};
+
+// Entry point
+VS_OUTPUT main( const VS_INPUT In )
+{
+	VS_OUTPUT Out;
+	float3 _var0 = (float3)0;
+	float3 _var1 = (float3)0;
+	SkinPositionAndNormal( SKINNING, float4( In.vPos, 1 ), In.vNormal,
+			In.vBoneWeights, In.vBoneIndices,
+			_var0, _var1 );
+	float4 _var2 = mul( float4(_var0.xyz,1), cViewProj );
+	Out.vProjPos = _var2;
+	Out.vTexCoord_0 = In.vTexCoord_0;
+	Out.vTexCoord_1 = _var2;
+	return Out;
+}

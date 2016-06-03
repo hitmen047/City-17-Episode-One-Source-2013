@@ -1,0 +1,69 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+sampler _Sampler_01		: register( s1 );
+sampler _Sampler_02		: register( s2 );
+
+// Constants
+const float2 g_cData_dust_scale		: register( c16 ); 		// Static
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float3 _var0 = tex2D( _Sampler_00, In.vTexCoord_0 ).rgb;
+	float2 _var1;
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float rot_def = float( 0.0f );
+		float2 trans_def = float2( 0.0f, 0.0f );
+		float fs = sin( rot_def );
+		float fc = cos( rot_def );
+		float4 row_0 = float4( fc * g_cData_dust_scale.x, -fs * g_cData_dust_scale.x, 0, ( -center_def.x * fc + center_def.y * fs ) * g_cData_dust_scale.x + center_def.x + trans_def.x );
+		float4 row_1 = float4( fs * g_cData_dust_scale.y, fc * g_cData_dust_scale.y, 0, ( -center_def.x * fs - center_def.y * fc ) * g_cData_dust_scale.y + center_def.y + trans_def.y );
+		_var1.x = dot( float4( In.vTexCoord_0, 0, 1 ), row_0 );
+		_var1.y = dot( float4( In.vTexCoord_0, 0, 1 ), row_1 );
+	}
+	float2 _var2 = 1.0f - In.vTexCoord_0;
+	float3 _var3 = tex2D( _Sampler_01, In.vTexCoord_0 ).rgb;
+	float4 _texLookup_11 = tex2D( _Sampler_02, _var1 );
+	float3 _var4 = _texLookup_11.rgb;
+	float _var5 = _texLookup_11.a;
+	float3 _var6 = tex2D( _Sampler_01, _var2 ).rgb;
+	_var3 = 1.0f - _var3;
+	_var6 = _var6 * float( 2.500000 );
+	_var3 = abs( _var3 );
+	_var6 = clamp( _var6, float( 0.000000 ), float( 1.000000 ) );
+	_var4 = _var4 * _var6;
+	_var4 = lerp( float( 0.000000 ), _var4, _var5 );
+	_var4 = _var4 * float( 1.000000 );
+	_var4 = _var4 * _var6;
+	_var4 = _var4 * _var3;
+	_var0 = _var0 + _var4;
+	float4 _var7 = float4( _var0.x, _var0.y, _var0.z, 1.000000 );
+	Out.vColor_0 = _var7;
+	return Out;
+}

@@ -1,0 +1,57 @@
+//Adrian: This file contains the credits info for both the Intro and outro.
+"credits.txt"
+{
+
+//========================================================
+//These are the names used in the intro (trainride)
+//========================================================
+"IntroCreditsNames"
+{
+	"City 17: Episode 1"	"ClientTitleFont"
+	" "	"CreditsText"
+	" "	"CreditsText"
+	"MrTwoVideoCards"   "CreditsText"
+	"Mr. Happy"    "CreditsText"
+	"1/4 Life"    "CreditsText"
+	"Dyllan"   "CreditsText"
+	"PelPix"   "CreditsText"
+}
+
+"CreditsParams"
+{
+	"logo" "City 17"
+	"logo2" "== episode one=="
+	
+	"fadeintime"	"2.5"
+	"fadeouttime"	"1"
+	"fadeholdtime"	"1.0"
+	"nextfadetime"	"1.0"
+	"pausebetweenwaves" "1.0"
+	"logotime" "1.0"
+	"posx"	"96"
+	"posy"	"360"
+
+	"color" "255 255 255 128"
+
+	//Outro Parameters
+	"scrolltime" "60"
+	"separation"  "10"
+}
+
+//========================================================
+//These are the names used in the outro (breen_01)
+//========================================================
+"OutroCreditsNames"
+{
+	"City 17 Made Possibly By:'" "ClientTitleFont"
+	" "	"CreditsOutroText"
+	"V"	"CreditsOutroLogos"
+	" "	"CreditsOutroText"
+	"Special Thanks:"	"ClientTitleFont"
+	" "	"CreditOutroText"
+	"Whoever Helped Us."    "CreditsOutroText"
+}
+
+
+
+}

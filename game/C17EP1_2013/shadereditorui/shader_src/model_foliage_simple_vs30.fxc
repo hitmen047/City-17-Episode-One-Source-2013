@@ -1,0 +1,113 @@
+// *********************************
+// ** auto generated vertexshader **
+// *********************************
+
+// Includes
+#include "common_vs_fxc.h"
+
+
+// Combos
+// DYNAMIC: "SKINNING"		"0..1"
+
+// Samplers
+
+// Constants
+const float3 g_cData_movement		: register( c48 ); 		// Static
+const float3 g_cData_wind_dir		: register( c49 ); 		// Callback
+const float g_cData_smallwindsize		: register( c50 ); 		// Static
+const float _g_Time		: register( c51 );
+const float g_cData_wind_speed		: register( c52 ); 		// Callback
+const float g_cData_wind_strength_mul		: register( c53 ); 		// Static
+const float g_cData_smallwindstrength		: register( c54 ); 		// Static
+const float g_cData_largewindstrength		: register( c55 ); 		// Static
+
+// Arrays
+
+// Semantic structures
+struct VS_INPUT
+{
+	float3 vPos					:	POSITION;
+	float4 vBoneWeights			:	BLENDWEIGHT;
+	float4 vBoneIndices			:	BLENDINDICES;
+	float3 vNormal				:	NORMAL;
+	float2 vTexCoord_0			:	TEXCOORD0;
+	float4 vColor_0				:	COLOR0;
+};
+
+struct VS_OUTPUT
+{
+	float4 vProjPos				:	POSITION;
+	float2 vTexCoord_0			:	TEXCOORD0;
+	float3 vTexCoord_1			:	TEXCOORD1;
+	float4 vTexCoord_2			:	TEXCOORD2;
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+VS_OUTPUT main( const VS_INPUT In )
+{
+	VS_OUTPUT Out;
+	float _var0 = g_cData_movement.x;
+	float3 _var1 = normalize( g_cData_wind_dir );
+	float3 _var2 = (float3)0;
+	float3 _var3 = (float3)0;
+	SkinPositionAndNormal( SKINNING, float4( In.vPos, 1 ), In.vNormal,
+			In.vBoneWeights, In.vBoneIndices,
+			_var2, _var3 );
+	float _var4 = g_cData_movement.y;
+	float _var5 = g_cData_wind_speed * g_cData_wind_strength_mul;
+	float _var6 = length( g_cData_wind_dir );
+	float _var7 = g_cData_movement.y;
+	float3 _var8 = _var2 / float( 128.000000 );
+	_var4 = float( 256.000000 ) * _var4;
+	_var7 = _var7 * float( 0.750000 );
+	float3 _var9 = frac( _var8 );
+	_var7 = 1.0f - _var7;
+	_var9 = _var9 * float( 20.000000 );
+	float _var10 = _var9.x;
+	float _var11 = _var9.y;
+	_var10 = _var10 + _var11;
+	_var10 = _g_Time + _var10;
+	_var4 = _var4 + _var10;
+	float _var12 = sin( _var10 );
+	_var4 = g_cData_smallwindsize * _var4;
+	_var12 = _var12 + float( 0.800000 );
+	_var4 = _var4 * _var5;
+	_var12 = clamp( _var12, float( 0.000000 ), float( 1.000000 ) );
+	_var4 = 1.0f - _var4;
+	_var12 = _var12 * _var12;
+	float3 _var13 = _var4 * _var1;
+	_var12 = 1.0f - _var12;
+	float3 _var14 = _var13 * float( 0.500000 );
+	float3 _var15 = _var13 * float( 0.250000 );
+	_var12 = _var12 * _var12;
+	_var14 = _var8 + _var14;
+	_var15 = _var8 + _var15;
+	_var12 = _var12 * float( 0.500000 );
+	_var14 = _var1 * _var14;
+	_var15 = _var1 * _var15;
+	_var12 = 1.0f - _var12;
+	_var14 = _var14 / g_cData_smallwindsize;
+	_var15 = sin( _var15 );
+	_var14 = sin( _var14 );
+	float _var16 = length( _var15 );
+	float _var17 = length( _var14 );
+	float3 _var18 = _var15 + _var16;
+	float3 _var19 = _var14 + _var17;
+	_var18 = _var18 * _var6;
+	_var19 = _var19 * _var6;
+	_var18 = _var18 * g_cData_largewindstrength;
+	_var19 = _var19 * g_cData_smallwindstrength;
+	_var18 = _var7 * _var18;
+	_var19 = _var0 * _var19;
+	_var19 = _var19 + _var18;
+	_var19 = _var19 * _var12;
+	_var19 = _var19 + _var2;
+	float4 _var20 = mul( float4(_var19.xyz,1), cViewProj );
+	Out.vProjPos = _var20;
+	Out.vTexCoord_0 = In.vTexCoord_0;
+	Out.vTexCoord_1 = _var19;
+	Out.vTexCoord_2 = _var20;
+	Out.vColor_0 = In.vColor_0;
+	return Out;
+}

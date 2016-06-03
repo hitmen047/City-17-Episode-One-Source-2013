@@ -1,0 +1,96 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Combos
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+sampler _Sampler_01		: register( s1 );
+
+// Constants
+
+// Arrays
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float _var0 = tex2D( _Sampler_00, In.vTexCoord_0 ).a;
+	float2 _var1 = In.vTexCoord_0.xy;
+	float3 _var2 = tex2D( _Sampler_01, In.vTexCoord_0 ).rgb;
+	float _var3 = _var0 * float( 0.000020 );
+	float _var4 = _var0 * float( 0.000004 );
+	float _var5 = _var0 * float( 0.000040 );
+	_var3 = clamp( _var3, float( 0.000000 ), float( 1.000000 ) );
+	_var4 = clamp( _var4, float( 0.000000 ), float( 1.000000 ) );
+	_var5 = clamp( _var5, float( 0.000000 ), float( 1.000000 ) );
+	_var3 = pow( _var3, float( 2.000000 ) );
+	float _var6 = lerp( float( 0.000000 ), float( 1024.000000 ), _var4 );
+	float _var7 = lerp( float( 0.090000 ), float( 1536.000000 ), _var4 );
+	_var5 = pow( _var5, float( 1.000000 ) );
+	_var5 = lerp( float( -0.002000 ), float( -0.001000 ), _var5 );
+	float _var8 = _var7 - _var6;
+	float _var9 = abs( _var5 );
+	float2 _var10 = float2( _var5, _var5 );
+	float2 _var11 = float2( _var5, float( 0.000000 ) );
+	float2 _var12 = float2( float( 0.000000 ), _var5 );
+	float2 _var13 = float2( _var9, _var9 );
+	float2 _var14 = float2( _var9, _var5 );
+	float2 _var15 = float2( _var5, _var9 );
+	_var10 = _var1 + _var10;
+	float2 _var16 = float2( float( 0.000000 ), _var9 );
+	_var11 = _var1 + _var11;
+	_var12 = _var1 + _var12;
+	float2 _var17 = float2( _var9, float( 0.000000 ) );
+	_var13 = _var1 + _var13;
+	_var14 = _var1 + _var14;
+	_var15 = _var1 + _var15;
+	float _var18 = tex2D( _Sampler_00, _var10 ).a;
+	_var16 = _var1 + _var16;
+	float _var19 = tex2D( _Sampler_00, _var11 ).a;
+	float _var20 = tex2D( _Sampler_00, _var12 ).a;
+	_var17 = _var1 + _var17;
+	float _var21 = tex2D( _Sampler_00, _var13 ).a;
+	float _var22 = tex2D( _Sampler_00, _var14 ).a;
+	float _var23 = tex2D( _Sampler_00, _var15 ).a;
+	float _var24 = tex2D( _Sampler_00, _var16 ).a;
+	float _var25 = tex2D( _Sampler_00, _var17 ).a;
+	_var21 = _var21 + _var22;
+	_var23 = _var23 + _var18;
+	_var24 = _var24 + _var19;
+	_var20 = _var20 + _var25;
+	_var21 = _var21 + _var23;
+	_var24 = _var24 + _var20;
+	_var21 = _var21 + _var24;
+	_var21 = _var21 * float( 0.125000 );
+	_var21 = _var21 - _var0;
+	_var21 = clamp( _var21, _var6, _var7 );
+	_var21 = _var21 - _var6;
+	_var21 = _var21 / _var8;
+	_var21 = 1.0f - _var21;
+	_var3 = clamp( _var21, _var3, float( 1.000000 ) );
+	_var2 = _var3 * _var2;
+	float4 _var26 = float4( _var2, float( 1.000000 ) );
+	Out.vColor_0 = _var26;
+	return Out;
+}

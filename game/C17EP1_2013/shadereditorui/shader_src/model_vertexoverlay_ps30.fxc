@@ -1,0 +1,121 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Combos
+// STATIC: "FLASHLIGHT"		"0..1"
+// DYNAMIC: "FLASHLIGHTDEPTHFILTERMODE"		"0..2"
+// DYNAMIC: "FLASHLIGHTSHADOWS"		"0..1"
+// DYNAMIC: "NUM_LIGHTS"		"0..4"
+// DYNAMIC: "PIXELFOGTYPE"		"0..1"
+// DYNAMIC: "WRITEWATERFOGTODESTALPHA"		"0..1"
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+sampler _Sampler_01		: register( s1 );
+sampler _Sampler_02		: register( s2 );
+sampler _Sampler_03		: register( s3 );
+sampler _gSampler_Flashlight_Cookie		: register( s4 );
+sampler _gSampler_Flashlight_Depth		: register( s5 );
+sampler _gSampler_Flashlight_Random		: register( s6 );
+sampler _Sampler_07		: register( s7 );
+
+// Constants
+const float g_cData_detailtexture_strength		: register( c16 ); 		// Static
+const float2 g_cData_detailtexture_scale		: register( c17 ); 		// Static
+const float2 g_cData_overlay_scale		: register( c18 ); 		// Static
+const float2 g_cData_overlay_maskscale		: register( c19 ); 		// Static
+const float g_cData_overlay_strength		: register( c20 ); 		// Static
+const float3 g_cData_overlay_slopebias		: register( c21 ); 		// Static
+const float4 _g_FogParams		: register( c22 );
+const float3 _g_VecOrig		: register( c23 );
+const float4 g_cFlashlightAttenuationFactors		: register( c8 );
+const float4 g_cFlashlightPos		: register( c9 );
+const float4 g_cShadowTweaks		: register( c7 );
+const float3 g_cAmbientCube[6]		: register( c0 );
+PixelShaderLightInfo g_cLightInfo[3]		: register( c6 );
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+	float3 vTexCoord_1			:	TEXCOORD1;
+	float3 vTexCoord_2			:	TEXCOORD2;
+	float4 vTexCoord_3			:	TEXCOORD3;
+	float4 vTexCoord_4			:	TEXCOORD4;
+	float4 vColor_0				:	COLOR0;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float2 _var0 = In.vTexCoord_0 * g_cData_detailtexture_scale;
+	float3 _var1 = tex2D( _Sampler_00, In.vTexCoord_0 ).rgb;
+	float2 _var2 = In.vTexCoord_0 * g_cData_overlay_scale;
+	float2 _var3 = In.vTexCoord_0 * g_cData_overlay_maskscale;
+	float _var4 = dot( In.vTexCoord_2, g_cData_overlay_slopebias );
+	float3 _var5 = float3( 0.000000, 0.000000, 0.000000 );
+	float _var6 = _g_VecOrig.z;
+	float _var7 = In.vTexCoord_1.z;
+	float _var8 = In.vTexCoord_3.z;
+	float3 _var9 = tex2D( _Sampler_01, _var0 ).rgb;
+	float4 _texLookup_31 = tex2D( _Sampler_02, _var2 );
+	float4 _var10 = _texLookup_31.rgba;
+	float3 _var11 = _texLookup_31.rgb;
+	float _var12 = tex2D( _Sampler_03, _var3 ).r;
+#if ( FLASHLIGHT == 1 )
+		float2 _var13 = In.vTexCoord_3.xy;
+		float _var14 = In.vTexCoord_3.w;
+		_var13 = _var13 / _var14;
+		float3 _var15 = DoFlashlight( g_cFlashlightPos.xyz, In.vTexCoord_1, In.vTexCoord_4, In.vTexCoord_2,
+				g_cFlashlightAttenuationFactors.xyz, g_cFlashlightAttenuationFactors.w,
+				_gSampler_Flashlight_Cookie, _gSampler_Flashlight_Depth, _gSampler_Flashlight_Random,
+				FLASHLIGHTDEPTHFILTERMODE, FLASHLIGHTSHADOWS, true,
+				_var13, false, g_cShadowTweaks );
+		_var5 = _var15;
+#endif
+	_var9 = smoothstep( float( -0.500000 ), g_cData_detailtexture_strength, _var9 );
+	_var12 = _var12 * g_cData_overlay_strength;
+	float _var16 = _var10.w;
+#if ( FLASHLIGHT == 0 )
+		float _var17 = tex2D( _Sampler_07, In.vTexCoord_0 ).r;
+		float3 _var18 = PixelShaderDoLighting( In.vTexCoord_1, In.vTexCoord_2, float3(0,0,0),
+				false, true, In.vColor_0,
+				g_cAmbientCube, NUM_LIGHTS, g_cLightInfo,
+				false, true, _var17 );
+		_var5 = _var18;
+#endif
+	_var9 = _var9 * _var1;
+	_var11 = _var11 * _var12;
+	float _var19 = pow( _var16, float( 10.000000 ) );
+	float _var20 = _var16 * float( 0.500000 );
+	_var5 = _var5;
+	_var6 = CalcPixelFogFactor( PIXELFOGTYPE, _g_FogParams, _var6, _var7, _var8 );
+	_var11 = _var9 + _var11;
+	float _var21 = min( _var4, _var19 );
+	float _var22 = max( _var4, _var19 );
+	_var20 = _var20 + float( 0.500000 );
+	_var21 = lerp( _var21, _var22, _var4 );
+	_var21 = smoothstep( float( 0.100000 ), float( 1.000000 ), _var21 );
+	_var21 = min( _var21, _var20 );
+	_var11 = lerp( _var9, _var11, _var21 );
+	_var11 = _var11 * _var5;
+	float4 _var23 = float4( _var11, float( 1.000000 ) );
+	_var23 = FinalOutput( _var23, _var6, PIXELFOGTYPE, TONEMAP_SCALE_LINEAR, true, _var8 );
+	Out.vColor_0 = _var23;
+	return Out;
+}

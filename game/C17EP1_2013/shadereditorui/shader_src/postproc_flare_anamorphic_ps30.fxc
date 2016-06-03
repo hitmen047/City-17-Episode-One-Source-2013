@@ -1,0 +1,65 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Combos
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+
+// Constants
+const float g_cData_Mutable_01		: register( c16 ); 		// Mutable
+
+// Arrays
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float3 _var0 = float3( 0.000000, 0.000000, 0.000000 );
+	float _var1 = float( 0.250000 );
+	float _var2 = float( 20.000000 );
+	float _var3 = float( 1.000000 );
+	for ( int _var4 = -25; _var4 <= 25; _var4++ )
+	{
+		float2 _var5 = float2( 0.015000, 0.000000 ) * _var4;
+		float _var6 = abs( _var4 );
+		_var5 = _var5 + In.vTexCoord_0;
+		_var6 = _var6 / _var2;
+		float3 _var7 = tex2D( _Sampler_00, _var5 ).rgb;
+		float _var8 = _var5.x;
+		_var6 = 1.0f - _var6;
+		_var7 = smoothstep( float( 0.100000 ), float( 0.600000 ), _var7 );
+		_var8 = _var8 - _var1;
+		_var6 = pow( _var6, _var3 );
+		_var8 = abs( _var8 );
+		_var8 = smoothstep( float( 0.500000 ), float( 0.400000 ), _var8 );
+		_var8 = _var8 * _var6;
+		_var7 = _var7 * _var8;
+		_var0 = _var0 + _var7;
+	}
+	_var0 = _var0 * float3( 0.030000, 0.040000, 0.050000 );
+	_var0 = _var0 * g_cData_Mutable_01;
+	float4 _var9 = float4( _var0.x, _var0.y, _var0.z, 1.000000 );
+	Out.vColor_0 = _var9;
+	return Out;
+}

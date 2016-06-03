@@ -1,0 +1,33 @@
+"rt_setup"
+{
+	"rt_00"
+	{
+		"rt_name"		"_rt_fbquarter_0"
+		"rt_imgformat"		"0"
+		"rt_sizemode"		"7"
+		"rt_depthmode"		"2"
+		"rt_flags"		"98316"
+		"rt_size_x"		"960"
+		"rt_size_y"		"540"
+	}
+	"rt_01"
+	{
+		"rt_name"		"_rt_ssao_0"
+		"rt_imgformat"		"5"
+		"rt_sizemode"		"3"
+		"rt_depthmode"		"2"
+		"rt_flags"		"33564"
+		"rt_size_x"		"640"
+		"rt_size_y"		"360"
+	}
+	"rt_02"
+	{
+		"rt_name"		"_rt_ssao_1"
+		"rt_imgformat"		"5"
+		"rt_sizemode"		"3"
+		"rt_depthmode"		"2"
+		"rt_flags"		"33564"
+		"rt_size_x"		"640"
+		"rt_size_y"		"360"
+	}
+}

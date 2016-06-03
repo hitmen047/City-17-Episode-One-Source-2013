@@ -1,0 +1,239 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Combos
+// DYNAMIC: "PIXELFOGTYPE"		"0..1"
+// DYNAMIC: "WRITEWATERFOGTODESTALPHA"		"0..1"
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+sampler _Sampler_01		: register( s1 );
+sampler _Sampler_02		: register( s2 );
+sampler _Sampler_03		: register( s3 );
+sampler _Sampler_04		: register( s4 );
+sampler _Sampler_05		: register( s5 );
+sampler _Sampler_06		: register( s6 );
+sampler _Sampler_07		: register( s7 );
+sampler _Sampler_08		: register( s8 );
+sampler _Sampler_09		: register( s9 );
+sampler _Sampler_10		: register( s10 );
+
+// Constants
+const float2 g_cData_cloudcolorboost		: register( c16 ); 		// Static
+const float _g_Time		: register( c17 );
+const float2 g_cData_scroll_rate		: register( c18 ); 		// Static
+const float2 g_cData_cloudshapemodifier		: register( c19 ); 		// Static
+const float4 g_cData_modifierscale		: register( c20 ); 		// Static
+const float2 g_cData_cloudamount		: register( c21 ); 		// Static
+const float2 g_cData_cloudbrightness		: register( c22 ); 		// Static
+const float3 g_cData_cloud_near_tint		: register( c23 ); 		// Static
+const float g_cData_distantcloudopacity		: register( c24 ); 		// Static
+const float g_cData_DistantVariationPower		: register( c25 ); 		// Static
+const float3 g_cData_cloud_far_tint		: register( c26 ); 		// Static
+const float3 g_cData_sky_dome_tint		: register( c27 ); 		// Static
+const float g_cData_star_strength		: register( c28 ); 		// Static
+
+// Arrays
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+	float vDepth				:	DEPTH;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float _var0 = g_cData_cloudcolorboost.x;
+	float _var1 = g_cData_scroll_rate.x;
+	float _var2 = tex2D( _Sampler_00, In.vTexCoord_0 ).r;
+	float _var3 = g_cData_cloudshapemodifier.x;
+	float _var4 = In.vTexCoord_0.x;
+	float _var5 = g_cData_modifierscale.x;
+	float _var6 = In.vTexCoord_0.y;
+	float _var7 = g_cData_modifierscale.y;
+	float _var8 = g_cData_cloudamount.x;
+	float _var9 = g_cData_cloudbrightness.x;
+	float _var10 = g_cData_scroll_rate.y;
+	float _var11 = g_cData_cloudshapemodifier.y;
+	float _var12 = In.vTexCoord_0.x;
+	float _var13 = g_cData_modifierscale.w;
+	float _var14 = In.vTexCoord_0.y;
+	float _var15 = g_cData_modifierscale.z;
+	float _var16 = g_cData_cloudamount.y;
+	float _var17 = g_cData_cloudbrightness.y;
+	float3 _var18 = tex2D( _Sampler_01, In.vTexCoord_0 ).rgb;
+	float _var19 = float( 0.000000 );
+	float _var20 = g_cData_star_strength;
+	float _var21 = g_cData_cloudcolorboost.y;
+	_var1 = _g_Time * _var1;
+	_var4 = _var4 * _var5;
+	_var6 = _var6 * _var7;
+	_var10 = _g_Time * _var10;
+	_var12 = _var12 * _var13;
+	_var14 = _var14 * _var15;
+	_var18 = _var18 * g_cData_sky_dome_tint;
+	if ( _var20 > float( 0.000000 ) )
+	{
+		float _var22 = tex2D( _Sampler_02, In.vTexCoord_0 ).r;
+		_var22 = _var22 * _var2;
+		_var22 = _var22 * _var20;
+		_var19 = _var22;
+	}
+	float _var23 = float( -0.001000 ) * _var1;
+	float2 _var24 = float2( 0.000500, 0.000700 ) * _var1;
+	float _var25 = float( 0.004000 ) * _var1;
+	float2 _var26 = float2( 0.000520, 0.000100 ) * _var1;
+	float2 _var27 = float2( _var4, _var6 );
+	float _var28 = float( 0.002000 ) * _var1;
+	float2 _var29 = float2( 0.000500, -0.000700 ) * _var1;
+	float _var30 = float( 0.004000 ) * _var1;
+	float2 _var31 = float2( 0.000700, 0.000400 ) * _var1;
+	float _var32 = float( -0.001000 ) * _var10;
+	float2 _var33 = float2( 0.001000, -0.005000 ) * _var10;
+	float _var34 = float( -0.002500 ) * _var10;
+	float2 _var35 = float2( -0.000500, -0.000400 ) * _var10;
+	float2 _var36 = float2( _var12, _var14 );
+	float _var37 = float( 0.000600 ) * _var10;
+	float2 _var38 = float2( 0.000500, -0.000500 ) * _var10;
+	float _var39 = float( -0.015000 ) * _var10;
+	float2 _var40 = float2( 0.005100, 0.005100 ) * _var10;
+	_var18 = _var18 + _var19;
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float2 scale_def = float2( 1.0f, 1.0f );
+		float fs = sin( _var23 );
+		float fc = cos( _var23 );
+		float4 row_0 = float4( fc * scale_def.x, -fs * scale_def.x, 0, ( -center_def.x * fc + center_def.y * fs ) * scale_def.x + center_def.x + _var24.x );
+		float4 row_1 = float4( fs * scale_def.y, fc * scale_def.y, 0, ( -center_def.x * fs - center_def.y * fc ) * scale_def.y + center_def.y + _var24.y );
+		_var24.x = dot( float4( In.vTexCoord_0, 0, 1 ), row_0 );
+		_var24.y = dot( float4( In.vTexCoord_0, 0, 1 ), row_1 );
+	}
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float2 scale_def = float2( 1.0f, 1.0f );
+		float fs = sin( _var25 );
+		float fc = cos( _var25 );
+		float4 row_0 = float4( fc * scale_def.x, -fs * scale_def.x, 0, ( -center_def.x * fc + center_def.y * fs ) * scale_def.x + center_def.x + _var26.x );
+		float4 row_1 = float4( fs * scale_def.y, fc * scale_def.y, 0, ( -center_def.x * fs - center_def.y * fc ) * scale_def.y + center_def.y + _var26.y );
+		_var26.x = dot( float4( In.vTexCoord_0, 0, 1 ), row_0 );
+		_var26.y = dot( float4( In.vTexCoord_0, 0, 1 ), row_1 );
+	}
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float2 scale_def = float2( 1.0f, 1.0f );
+		float fs = sin( _var28 );
+		float fc = cos( _var28 );
+		float4 row_0 = float4( fc * scale_def.x, -fs * scale_def.x, 0, ( -center_def.x * fc + center_def.y * fs ) * scale_def.x + center_def.x + _var29.x );
+		float4 row_1 = float4( fs * scale_def.y, fc * scale_def.y, 0, ( -center_def.x * fs - center_def.y * fc ) * scale_def.y + center_def.y + _var29.y );
+		_var27.x = dot( float4( _var27, 0, 1 ), row_0 );
+		_var27.y = dot( float4( _var27, 0, 1 ), row_1 );
+	}
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float2 scale_def = float2( 1.0f, 1.0f );
+		float fs = sin( _var30 );
+		float fc = cos( _var30 );
+		float4 row_0 = float4( fc * scale_def.x, -fs * scale_def.x, 0, ( -center_def.x * fc + center_def.y * fs ) * scale_def.x + center_def.x + _var31.x );
+		float4 row_1 = float4( fs * scale_def.y, fc * scale_def.y, 0, ( -center_def.x * fs - center_def.y * fc ) * scale_def.y + center_def.y + _var31.y );
+		_var31.x = dot( float4( In.vTexCoord_0, 0, 1 ), row_0 );
+		_var31.y = dot( float4( In.vTexCoord_0, 0, 1 ), row_1 );
+	}
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float2 scale_def = float2( 1.0f, 1.0f );
+		float fs = sin( _var32 );
+		float fc = cos( _var32 );
+		float4 row_0 = float4( fc * scale_def.x, -fs * scale_def.x, 0, ( -center_def.x * fc + center_def.y * fs ) * scale_def.x + center_def.x + _var33.x );
+		float4 row_1 = float4( fs * scale_def.y, fc * scale_def.y, 0, ( -center_def.x * fs - center_def.y * fc ) * scale_def.y + center_def.y + _var33.y );
+		_var33.x = dot( float4( In.vTexCoord_0, 0, 1 ), row_0 );
+		_var33.y = dot( float4( In.vTexCoord_0, 0, 1 ), row_1 );
+	}
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float2 scale_def = float2( 1.0f, 1.0f );
+		float fs = sin( _var34 );
+		float fc = cos( _var34 );
+		float4 row_0 = float4( fc * scale_def.x, -fs * scale_def.x, 0, ( -center_def.x * fc + center_def.y * fs ) * scale_def.x + center_def.x + _var35.x );
+		float4 row_1 = float4( fs * scale_def.y, fc * scale_def.y, 0, ( -center_def.x * fs - center_def.y * fc ) * scale_def.y + center_def.y + _var35.y );
+		_var35.x = dot( float4( In.vTexCoord_0, 0, 1 ), row_0 );
+		_var35.y = dot( float4( In.vTexCoord_0, 0, 1 ), row_1 );
+	}
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float2 scale_def = float2( 1.0f, 1.0f );
+		float fs = sin( _var37 );
+		float fc = cos( _var37 );
+		float4 row_0 = float4( fc * scale_def.x, -fs * scale_def.x, 0, ( -center_def.x * fc + center_def.y * fs ) * scale_def.x + center_def.x + _var38.x );
+		float4 row_1 = float4( fs * scale_def.y, fc * scale_def.y, 0, ( -center_def.x * fs - center_def.y * fc ) * scale_def.y + center_def.y + _var38.y );
+		_var36.x = dot( float4( _var36, 0, 1 ), row_0 );
+		_var36.y = dot( float4( _var36, 0, 1 ), row_1 );
+	}
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float2 scale_def = float2( 1.0f, 1.0f );
+		float fs = sin( _var39 );
+		float fc = cos( _var39 );
+		float4 row_0 = float4( fc * scale_def.x, -fs * scale_def.x, 0, ( -center_def.x * fc + center_def.y * fs ) * scale_def.x + center_def.x + _var40.x );
+		float4 row_1 = float4( fs * scale_def.y, fc * scale_def.y, 0, ( -center_def.x * fs - center_def.y * fc ) * scale_def.y + center_def.y + _var40.y );
+		_var40.x = dot( float4( In.vTexCoord_0, 0, 1 ), row_0 );
+		_var40.y = dot( float4( In.vTexCoord_0, 0, 1 ), row_1 );
+	}
+	float _var41 = tex2D( _Sampler_03, _var24 ).r;
+	float _var42 = tex2D( _Sampler_04, _var27 ).r;
+	float _var43 = tex2D( _Sampler_05, _var33 ).r;
+	float _var44 = tex2D( _Sampler_06, _var36 ).r;
+	float _var45 = tex2D( _Sampler_07, _var40 ).r;
+	_var3 = _var3 * _var42;
+	_var11 = _var11 * _var44;
+	_var45 = pow( _var45, g_cData_DistantVariationPower );
+	_var26 = _var26 + _var3;
+	_var31 = _var31 + _var3;
+	_var35 = _var35 + _var11;
+	_var17 = _var17 * _var45;
+	float _var46 = tex2D( _Sampler_08, _var26 ).r;
+	float _var47 = tex2D( _Sampler_09, _var31 ).r;
+	float _var48 = tex2D( _Sampler_10, _var35 ).r;
+	_var46 = _var46 * _var47;
+	_var48 = pow( _var48, _var16 );
+	_var46 = pow( _var46, _var8 );
+	_var48 = _var48 * _var17;
+	_var46 = _var46 * _var9;
+	_var48 = _var2 * _var48;
+	_var46 = _var2 * _var46;
+	_var48 = g_cData_distantcloudopacity * _var48;
+	_var41 = lerp( float( 0.000000 ), _var41, _var46 );
+	_var43 = lerp( float( 0.000000 ), _var43, _var48 );
+	float3 _var49 = _var41 * g_cData_cloud_near_tint;
+	float3 _var50 = _var43 * g_cData_cloud_far_tint;
+	float _var51 = _var41 + _var43;
+	_var49 = _var49 + _var50;
+	_var51 = _var51 * float( 0.100000 );
+	float3 _var52 = _var0 * _var49;
+	float3 _var53 = _var21 * _var49;
+	_var51 = 1.0f - _var51;
+	_var52 = _var52 * _var18;
+	_var53 = _var53 + _var18;
+	_var52 = _var52 + _var53;
+	float4 _var54 = float4( _var52, _var51 );
+	_var54 = FinalOutput( _var54, float( 0.000000 ), PIXELFOGTYPE, TONEMAP_SCALE_LINEAR, false, 1.0f );
+	Out.vColor_0 = _var54;
+	Out.vDepth = float( 1.000000 );
+	return Out;
+}

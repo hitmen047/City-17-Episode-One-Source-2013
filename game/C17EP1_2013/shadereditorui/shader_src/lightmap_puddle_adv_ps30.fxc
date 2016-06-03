@@ -1,0 +1,163 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+sampler _Sampler_01		: register( s1 );
+sampler _Sampler_02		: register( s2 );
+sampler _Sampler_03		: register( s3 );
+sampler _Sampler_04		: register( s4 );
+sampler _Sampler_05		: register( s5 );
+sampler _Sampler_06		: register( s6 );
+
+// Constants
+const float2 g_cData_warp_amount		: register( c16 ); 		// Static
+const float _g_Time		: register( c17 );
+const float2 g_cData_warp_directions1		: register( c18 ); 		// Static
+const float g_cData_warp_strength1		: register( c19 ); 		// Static
+const float2 g_cData_warp_directions2		: register( c20 ); 		// Static
+const float4x4 g_cCMatrix_ViewProj		: register( c21 );
+const float3 g_cData_envmap_strength		: register( c25 ); 		// Static
+const float2 g_cData_warp_frothamount		: register( c26 ); 		// Static
+const float2 g_cData_frothscale		: register( c27 ); 		// Static
+const float2 g_cData_frothscrollrate		: register( c28 ); 		// Static
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+	float3 vTexCoord_1			:	TEXCOORD1;
+	float3 vTexCoord_2			:	TEXCOORD2;
+	float4 vTexCoord_3			:	TEXCOORD3;
+	float3 vTexCoord_4			:	TEXCOORD4;
+	float3 vTexCoord_5			:	TEXCOORD5;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float2 _var0 = In.vTexCoord_3.xy;
+	float _var1 = In.vTexCoord_3.w;
+	float2 _var2 = _g_Time * g_cData_warp_directions1;
+	float2 _var3 = _g_Time * g_cData_warp_directions2;
+	float3 _var4 = tex2D( _Sampler_00, In.vTexCoord_0 ).rgb;
+	float3x3 _var5 = { In.vTexCoord_4,
+				In.vTexCoord_5,
+				In.vTexCoord_1 };
+	float3 _var6 = normalize( In.vTexCoord_2 );
+	float3x3 _var7 = { In.vTexCoord_5,
+				In.vTexCoord_4,
+				In.vTexCoord_2 };
+	float _var8 = tex2D( _Sampler_01, In.vTexCoord_0 ).a;
+	float2 _var9 = g_cData_frothscrollrate * _g_Time;
+	_var0 = _var0 / _var1;
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float rot_def = float( 0.0f );
+		float2 scale_def = float2( 1.0f, 1.0f );
+		float fs = sin( rot_def );
+		float fc = cos( rot_def );
+		float4 row_0 = float4( fc * scale_def.x, -fs * scale_def.x, 0, ( -center_def.x * fc + center_def.y * fs ) * scale_def.x + center_def.x + _var2.x );
+		float4 row_1 = float4( fs * scale_def.y, fc * scale_def.y, 0, ( -center_def.x * fs - center_def.y * fc ) * scale_def.y + center_def.y + _var2.y );
+		_var2.x = dot( float4( In.vTexCoord_0, 0, 1 ), row_0 );
+		_var2.y = dot( float4( In.vTexCoord_0, 0, 1 ), row_1 );
+	}
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float rot_def = float( 0.0f );
+		float2 scale_def = float2( 1.0f, 1.0f );
+		float fs = sin( rot_def );
+		float fc = cos( rot_def );
+		float4 row_0 = float4( fc * scale_def.x, -fs * scale_def.x, 0, ( -center_def.x * fc + center_def.y * fs ) * scale_def.x + center_def.x + _var3.x );
+		float4 row_1 = float4( fs * scale_def.y, fc * scale_def.y, 0, ( -center_def.x * fs - center_def.y * fc ) * scale_def.y + center_def.y + _var3.y );
+		_var3.x = dot( float4( In.vTexCoord_0, 0, 1 ), row_0 );
+		_var3.y = dot( float4( In.vTexCoord_0, 0, 1 ), row_1 );
+	}
+	_var4 = lerp( _var4, float3( 0.500000, 0.500000, 1.000000 ), float( 0.500000 ) );
+	_var0 = _var0 * float2( 0.500000, -0.500000 );
+	float4 _texLookup_50 = tex2D( _Sampler_02, _var2 );
+	float3 _var10 = _texLookup_50.rgb;
+	float _var11 = _texLookup_50.r;
+	float _var12 = _texLookup_50.g;
+	float _var13 = tex2D( _Sampler_03, _var3 ).g;
+	_var4 = _var4 * float( 2.000000 );
+	_var0 = _var0 + float( 0.500000 );
+	_var12 = _var12 * g_cData_warp_strength1;
+	_var13 = _var13 * float( 1.000000 );
+	_var4 = _var4 - float( 1.000000 );
+	_var10 = _var10 * float( 2.000000 );
+	_var12 = lerp( _var12, _var13, float( 0.500000 ) );
+	_var4 = mul( _var4, _var5 );
+	_var10 = _var10 - float( 1.000000 );
+	_var12 = float( 1.400000 ) * _var12;
+	_var4 = normalize( _var4 );
+	_var10 = mul( _var10, _var7 );
+	float2 _var14 = g_cData_warp_amount * _var12;
+	float3 _var15 = mul( float4(_var4.xyz,1), (float3x3)g_cCMatrix_ViewProj );
+	float _var16 = dot( _var4, _var6 );
+	_var10 = normalize( _var10 );
+	float2 _var17 = g_cData_warp_frothamount * _var12;
+	_var14 = _var14 * float( 0.012000 );
+	float2 _var18 = _var15.xy;
+	float _var19 = smoothstep( float( -0.050000 ), float( -0.100000 ), _var16 );
+	float _var20 = abs( _var16 );
+	_var10 = reflect( _var6, _var10 );
+	_var17 = _var17 * float( 0.010000 );
+	_var0 = _var0 + _var14;
+	_var18 = _var18 * _var19;
+	_var20 = 1.0f - _var20;
+	float3 _var21 = texCUBE( _Sampler_04, _var10 ).rgb;
+	_var17 = In.vTexCoord_0 + _var17;
+	_var18 = _var18 * float2( 1.000000, -1.000000 );
+	_var20 = _var20 * float( 0.100000 );
+	_var21 = _var21 * ENV_MAP_SCALE;
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float rot_def = float( 0.0f );
+		float fs = sin( rot_def );
+		float fc = cos( rot_def );
+		float4 row_0 = float4( fc * g_cData_frothscale.x, -fs * g_cData_frothscale.x, 0, ( -center_def.x * fc + center_def.y * fs ) * g_cData_frothscale.x + center_def.x + _var9.x );
+		float4 row_1 = float4( fs * g_cData_frothscale.y, fc * g_cData_frothscale.y, 0, ( -center_def.x * fs - center_def.y * fc ) * g_cData_frothscale.y + center_def.y + _var9.y );
+		_var17.x = dot( float4( _var17, 0, 1 ), row_0 );
+		_var17.y = dot( float4( _var17, 0, 1 ), row_1 );
+	}
+	_var18 = _var18 * _var20;
+	_var21 = _var21 * _var11;
+	float _var22 = tex2D( _Sampler_05, _var17 ).r;
+	_var0 = _var0 - _var18;
+	_var21 = _var21 * g_cData_envmap_strength;
+	_var8 = _var8 - _var22;
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float rot_def = float( 0.0f );
+		float2 trans_def = float2( 0.0f, 0.0f );
+		float fs = sin( rot_def );
+		float fc = cos( rot_def );
+		float4 row_0 = float4( fc * float2( 1.000000, -1.000000 ).x, -fs * float2( 1.000000, -1.000000 ).x, 0, ( -center_def.x * fc + center_def.y * fs ) * float2( 1.000000, -1.000000 ).x + center_def.x + trans_def.x );
+		float4 row_1 = float4( fs * float2( 1.000000, -1.000000 ).y, fc * float2( 1.000000, -1.000000 ).y, 0, ( -center_def.x * fs - center_def.y * fc ) * float2( 1.000000, -1.000000 ).y + center_def.y + trans_def.y );
+		_var0.x = dot( float4( _var0, 0, 1 ), row_0 );
+		_var0.y = dot( float4( _var0, 0, 1 ), row_1 );
+	}
+	float4 _var23 = float4( _var21, _var8 );
+	float3 _var24 = tex2D( _Sampler_06, _var0 ).rgb;
+	float4 _var25 = float4( _var24, float( 1.000000 ) );
+	_var25 = _var25 * _var23;
+	Out.vColor_0 = _var25;
+	return Out;
+}

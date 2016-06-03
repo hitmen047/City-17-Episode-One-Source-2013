@@ -1,0 +1,124 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Combos
+// DYNAMIC: "FLASHLIGHT"		"0..0"
+// DYNAMIC: "PIXELFOGTYPE"		"0..1"
+// DYNAMIC: "WRITEWATERFOGTODESTALPHA"		"0..1"
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+sampler _Sampler_01		: register( s1 );
+sampler _Sampler_02		: register( s2 );
+sampler _Sampler_03		: register( s3 );
+sampler _Sampler_04		: register( s4 );
+
+// Constants
+const float2 g_cData_warp_amount		: register( c16 ); 		// Static
+const float _g_Time		: register( c17 );
+const float4 g_cData_warp_directions		: register( c18 ); 		// Static
+const float g_cData_warp_strength1		: register( c19 ); 		// Static
+const float g_cData_warp_strength2		: register( c20 ); 		// Static
+const float2 g_cData_scale		: register( c21 ); 		// Static
+const float2 g_cData_scroll_rate		: register( c22 ); 		// Static
+const float4 _g_FogParams		: register( c23 );
+const float3 _g_VecOrig		: register( c24 );
+
+// Arrays
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+	float2 vTexCoord_1			:	TEXCOORD1;
+	float4 vTexCoord_2			:	TEXCOORD2;
+	float3 vTexCoord_3			:	TEXCOORD3;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float4 _var0 = g_cData_warp_directions / float( 100.000000 );
+	float2 _var1 = _g_Time * g_cData_scroll_rate;
+	float3 _var2 = float3( 0.000000, 0.000000, 0.000000 );
+	float _var3 = tex2D( _Sampler_00, In.vTexCoord_0 ).r;
+	float _var4 = _g_VecOrig.z;
+	float _var5 = In.vTexCoord_3.z;
+	float _var6 = In.vTexCoord_2.z;
+	float2 _var7 = _var0.xy;
+	float2 _var8 = _var0.zw;
+#if ( FLASHLIGHT == 0 )
+		float3 _var9 = tex2D( _Sampler_01, In.vTexCoord_1 ).rgb;
+		_var9 = _var9 * LIGHT_MAP_SCALE;
+		_var2 = _var9;
+#endif
+	_var7 = _g_Time * _var7;
+	_var8 = _g_Time * _var8;
+	_var4 = CalcPixelFogFactor( PIXELFOGTYPE, _g_FogParams, _var4, _var5, _var6 );
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float rot_def = float( 0.0f );
+		float2 scale_def = float2( 1.0f, 1.0f );
+		float fs = sin( rot_def );
+		float fc = cos( rot_def );
+		float4 row_0 = float4( fc * scale_def.x, -fs * scale_def.x, 0, ( -center_def.x * fc + center_def.y * fs ) * scale_def.x + center_def.x + _var7.x );
+		float4 row_1 = float4( fs * scale_def.y, fc * scale_def.y, 0, ( -center_def.x * fs - center_def.y * fc ) * scale_def.y + center_def.y + _var7.y );
+		_var7.x = dot( float4( In.vTexCoord_0, 0, 1 ), row_0 );
+		_var7.y = dot( float4( In.vTexCoord_0, 0, 1 ), row_1 );
+	}
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float rot_def = float( 0.0f );
+		float2 scale_def = float2( 1.0f, 1.0f );
+		float fs = sin( rot_def );
+		float fc = cos( rot_def );
+		float4 row_0 = float4( fc * scale_def.x, -fs * scale_def.x, 0, ( -center_def.x * fc + center_def.y * fs ) * scale_def.x + center_def.x + _var8.x );
+		float4 row_1 = float4( fs * scale_def.y, fc * scale_def.y, 0, ( -center_def.x * fs - center_def.y * fc ) * scale_def.y + center_def.y + _var8.y );
+		_var8.x = dot( float4( In.vTexCoord_0, 0, 1 ), row_0 );
+		_var8.y = dot( float4( In.vTexCoord_0, 0, 1 ), row_1 );
+	}
+	float _var10 = tex2D( _Sampler_02, _var7 ).r;
+	float _var11 = tex2D( _Sampler_03, _var8 ).r;
+	_var10 = _var10 * g_cData_warp_strength1;
+	_var11 = _var11 * g_cData_warp_strength2;
+	_var10 = lerp( _var10, _var11, float( 0.500000 ) );
+	_var10 = float( 1.400000 ) * _var10;
+	float2 _var12 = g_cData_warp_amount * _var10;
+	_var12 = _var12 * float( 0.012000 );
+	_var12 = In.vTexCoord_0 + _var12;
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float rot_def = float( 0.0f );
+		float fs = sin( rot_def );
+		float fc = cos( rot_def );
+		float4 row_0 = float4( fc * g_cData_scale.x, -fs * g_cData_scale.x, 0, ( -center_def.x * fc + center_def.y * fs ) * g_cData_scale.x + center_def.x + _var1.x );
+		float4 row_1 = float4( fs * g_cData_scale.y, fc * g_cData_scale.y, 0, ( -center_def.x * fs - center_def.y * fc ) * g_cData_scale.y + center_def.y + _var1.y );
+		_var12.x = dot( float4( _var12, 0, 1 ), row_0 );
+		_var12.y = dot( float4( _var12, 0, 1 ), row_1 );
+	}
+	float4 _texLookup_50 = tex2D( _Sampler_04, _var12 );
+	float3 _var13 = _texLookup_50.rgb;
+	float _var14 = _texLookup_50.a;
+	_var13 = _var13 * _var2;
+	_var14 = _var14 * float( 0.500000 );
+	_var3 = _var3 * _var14;
+	float4 _var15 = float4( _var13, _var3 );
+	_var15 = FinalOutput( _var15, _var4, PIXELFOGTYPE, TONEMAP_SCALE_LINEAR, false, 1.0f );
+	Out.vColor_0 = _var15;
+	return Out;
+}

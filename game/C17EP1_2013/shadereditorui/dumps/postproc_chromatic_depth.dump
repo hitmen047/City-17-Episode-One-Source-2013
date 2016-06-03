@@ -1,0 +1,34 @@
+"postproc_chromatic_depth"
+{
+	"vs_name"		"postproc_chromatic_depth_vs20"
+	"ps_name"		"postproc_chromatic_depth_ps20b"
+	"i_sm"		"0"
+	"i_cull"		"0"
+	"i_ablend"		"0"
+	"fl_atestref"		"0.500000"
+	"i_dtest"		"0"
+	"i_dwrite"		"0"
+	"i_srgbw"		"0"
+	"i_vfmt_flags"		"1"
+	"i_vfmt_texcoords"		"1"
+	"i_vfmt_udata"		"0"
+	"i_vlit"		"0"
+	"i_vrefract"		"1"
+	"identifiers_VS"
+	{
+		"i_numdcombos"		"1"
+	}
+	"identifiers_PS"
+	{
+		"texsamp_0"
+		{
+			"sz_param"		"depthbuffer"
+			"sz_fallback"		"white"
+			"i_sampidx"		"0"
+			"i_texmode"		"5"
+			"i_cubemap"		"0"
+			"i_srgb"		"0"
+		}
+		"i_numdcombos"		"1"
+	}
+}

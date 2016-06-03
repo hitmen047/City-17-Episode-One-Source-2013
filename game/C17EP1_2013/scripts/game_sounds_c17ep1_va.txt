@@ -1,0 +1,12 @@
+"map4_unnamed_hey"
+{
+	"channel"		"CHAN_VOICE"
+	"volume"		"VOL_NORM"
+	"pitch"			"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_TALKING"
+
+	"wave"			"*vo/npc/leader/mimp.brief.goodluck.wav"
+}
+
+

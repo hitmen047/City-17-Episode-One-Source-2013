@@ -1,0 +1,83 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Combos
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+
+// Constants
+const float _g_Time		: register( c16 );
+const float g_cData_Mutable_01		: register( c17 ); 		// Mutable
+
+// Arrays
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float4 _texLookup_15 = tex2D( _Sampler_00, In.vTexCoord_0 );
+	float4 _var0 = _texLookup_15.rgba;
+	float3 _var1 = _texLookup_15.rgb;
+	float _var2 = _texLookup_15.a;
+	float _var3 = _g_Time * float( 2.000000 );
+	float2 _var4 = In.vTexCoord_0 - float( 0.500000 );
+	float4 _var5 = float4( 0.000000, 0.000000, 0.000000, 0.000000 );
+	float2 _var6 = In.vTexCoord_0;
+	float _var7 = _var3 * float( 2.000000 );
+	float _var8 = length( _var4 );
+	float _var9 = sin( _var3 );
+	_var7 = sin( _var7 );
+	_var8 = pow( _var8, float( 2.000000 ) );
+	_var9 = _var9 / float( 256.000000 );
+	_var7 = _var7 / float( 8.000000 );
+	_var8 = _var8 * float( 2.000000 );
+	float _var10 = _var9;
+	_var7 = _var7 + _var8;
+	for ( int _var11 = 0; _var11 < 32; _var11++ )
+	{
+		_var10 = abs( _var10 );
+		float2 _var12 = float2( 0.999900, 0.999900 ) - _var10;
+		{
+			float2 center_def = float2( 0.5f, 0.5f );
+			float rot_def = float( 0.0f );
+			float2 trans_def = float2( 0.0f, 0.0f );
+			float fs = sin( rot_def );
+			float fc = cos( rot_def );
+			float4 row_0 = float4( fc * _var12.x, -fs * _var12.x, 0, ( -center_def.x * fc + center_def.y * fs ) * _var12.x + center_def.x + trans_def.x );
+			float4 row_1 = float4( fs * _var12.y, fc * _var12.y, 0, ( -center_def.x * fs - center_def.y * fc ) * _var12.y + center_def.y + trans_def.y );
+			_var6.x = dot( float4( _var6, 0, 1 ), row_0 );
+			_var6.y = dot( float4( _var6, 0, 1 ), row_1 );
+		}
+		float4 _var13 = tex2D( _Sampler_00, _var6 ).rgba;
+		_var5 = _var5 + _var13;
+	}
+	_var1 = lerp( _var1, float3( 1.000000, 0.000000, 0.000000 ), _var7 );
+	_var5 = _var5 / float( 32.000000 );
+	float4 _var14 = float4( _var1, _var2 );
+	_var14 = _var14 + _var5;
+	_var14 = _var14 / float( 2.000000 );
+	_var0 = lerp( _var0, _var14, g_cData_Mutable_01 );
+	Out.vColor_0 = _var0;
+	return Out;
+}

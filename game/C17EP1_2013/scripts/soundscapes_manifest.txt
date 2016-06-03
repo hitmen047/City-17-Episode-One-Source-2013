@@ -1,0 +1,21 @@
+soundscapes_manifest
+{
+	"file"		"scripts/soundscapes.txt"
+
+	// List additional soundscape files here
+	
+	"file"		"scripts/soundscapes_lostcoast.txt"
+	"file"		"scripts/soundscapes_citadel_episodic.txt"
+	"file"		"scripts/soundscapes_city_episodic.txt"
+		
+	"file"		"scripts/soundscapes_canals.txt"
+	"file"		"scripts/soundscapes_streetwar.txt"
+	"file"		"scripts/soundscapes_citadel.txt"
+
+//c17
+	"file"		"scripts/soundscapes_c17ep1.txt"
+	"file"		"scripts/soundscapes_c17_city_day_02b.txt"	
+	"file"		"scripts/soundscapes_c17_city_day_02c.txt"	
+	"file"		"scripts/soundscapes_c17_city_day_03.txt"	
+	"file"		"scripts/soundscapes_c17_city_day_04.txt"	
+}

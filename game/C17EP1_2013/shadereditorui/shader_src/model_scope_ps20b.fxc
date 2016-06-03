@@ -1,0 +1,107 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Combos
+// DYNAMIC: "PIXELFOGTYPE"		"0..1"
+// DYNAMIC: "WRITEWATERFOGTODESTALPHA"		"0..1"
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+sampler _Sampler_01		: register( s1 );
+sampler _Sampler_02		: register( s2 );
+
+// Constants
+const float2 _g_TexelSize		: register( c16 );
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float4 _texLookup_11 = tex2D( _Sampler_00, In.vTexCoord_0 );
+	float _var0 = _texLookup_11.r;
+	float _var1 = _texLookup_11.g;
+	float _var2 = _texLookup_11.b;
+	float _var3 = _g_TexelSize.x;
+	float _var4 = _g_TexelSize.y;
+	float4 _texLookup_16 = tex2D( _Sampler_01, In.vTexCoord_0 );
+	float3 _var5 = _texLookup_16.rgb;
+	float _var6 = _texLookup_16.a;
+	float2 _var7 = In.vTexCoord_0 - float( 0.500000 );
+	float2 _var8 = float2( _var0, _var1 );
+	_var3 = _var3 / _var4;
+	float _var9 = length( _var7 );
+	float3 _var10 = float3( _var8, _var2 );
+	_var3 = _var3 * float( 0.600000 );
+	_var9 = pow( _var9, float( 2.000000 ) );
+	float _var11 = _var10.x;
+	float2 _var12 = float2( _var3, float( 0.600000 ) );
+	_var9 = _var9 * float( 2.000000 );
+	float2 _var13 = In.vTexCoord_0 * _var11;
+	float2 _var14;
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float rot_def = float( 0.0f );
+		float2 trans_def = float2( 0.0f, 0.0f );
+		float fs = sin( rot_def );
+		float fc = cos( rot_def );
+		float4 row_0 = float4( fc * _var12.x, -fs * _var12.x, 0, ( -center_def.x * fc + center_def.y * fs ) * _var12.x + center_def.x + trans_def.x );
+		float4 row_1 = float4( fs * _var12.y, fc * _var12.y, 0, ( -center_def.x * fs - center_def.y * fc ) * _var12.y + center_def.y + trans_def.y );
+		_var14.x = dot( float4( _var13, 0, 1 ), row_0 );
+		_var14.y = dot( float4( _var13, 0, 1 ), row_1 );
+	}
+	float2 _var15;
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float rot_def = float( 0.0f );
+		float fs = sin( rot_def );
+		float fc = cos( rot_def );
+		float4 row_0 = float4( fc * _var12.x, -fs * _var12.x, 0, ( -center_def.x * fc + center_def.y * fs ) * _var12.x + center_def.x + float2( 0.001000, 0.000000 ).x );
+		float4 row_1 = float4( fs * _var12.y, fc * _var12.y, 0, ( -center_def.x * fs - center_def.y * fc ) * _var12.y + center_def.y + float2( 0.001000, 0.000000 ).y );
+		_var15.x = dot( float4( _var13, 0, 1 ), row_0 );
+		_var15.y = dot( float4( _var13, 0, 1 ), row_1 );
+	}
+	float2 _var16;
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float rot_def = float( 0.0f );
+		float fs = sin( rot_def );
+		float fc = cos( rot_def );
+		float4 row_0 = float4( fc * _var12.x, -fs * _var12.x, 0, ( -center_def.x * fc + center_def.y * fs ) * _var12.x + center_def.x + float2( -0.001000, 0.000000 ).x );
+		float4 row_1 = float4( fs * _var12.y, fc * _var12.y, 0, ( -center_def.x * fs - center_def.y * fc ) * _var12.y + center_def.y + float2( -0.001000, 0.000000 ).y );
+		_var16.x = dot( float4( _var13, 0, 1 ), row_0 );
+		_var16.y = dot( float4( _var13, 0, 1 ), row_1 );
+	}
+	float4 _texLookup_32 = tex2D( _Sampler_02, _var14 );
+	float3 _var17 = _texLookup_32.rgb;
+	float _var18 = _texLookup_32.g;
+	float _var19 = tex2D( _Sampler_02, _var15 ).r;
+	float _var20 = tex2D( _Sampler_02, _var16 ).b;
+	float2 _var21 = float2( _var19, _var18 );
+	float3 _var22 = float3( _var21, _var20 );
+	_var17 = lerp( _var17, _var22, float( 0.000000 ) );
+	_var17 = lerp( _var17, _var5, _var6 );
+	float4 _var23 = float4( _var17, float( 1.000000 ) );
+	_var23 = FinalOutput( _var23, float( 0.000000 ), PIXELFOGTYPE, TONEMAP_SCALE_NONE, false, 1.0f );
+	Out.vColor_0 = _var23;
+	return Out;
+}

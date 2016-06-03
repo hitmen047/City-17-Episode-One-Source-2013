@@ -1,0 +1,449 @@
+// Soundscapes for c17ep1
+
+"c17ep1.sewer.main"
+{
+	"dsp" "1"
+
+//Outside sounds
+	"playrandom"
+	{
+		"time"		"8, 18"
+		"volume"	"0.1, 0.3"
+		"pitch"		"90,105"
+		"soundlevel"	"SNDLVL_140dB"
+		"position" 	"random"
+		"rndwave"
+		{
+			"wave"	"ambient/levels/city/citadel_cloudhit1.wav"
+			"wave"	"ambient/levels/intro/Rhumble_1_42_07.wav"
+		}
+	}
+
+//Distant Leaks
+	"playrandom"
+	{
+		"time"		"4, 10"
+		"volume"	"0.5, 0.8"
+		"position" 	"random"
+		"rndwave"
+		{
+			"wave"	"ambient\water\distant_drip1.wav"
+			"wave"	"ambient\water\distant_drip2.wav"
+			"wave"	"ambient\water\distant_drip3.wav"
+			"wave"	"ambient\water\distant_drip4.wav"
+		}
+	}
+//Wind gusts -- SET THESE TO POINTS OUTSIDE THE SEWERS. MMKAY
+	"playrandom"
+	{
+		"time"		"6, 12"
+		"volume"	"0.1, 0.2"
+		"position" 	"1"
+		"rndwave"
+		{
+			"wave"	"ambient\wind\wind_med1.wav"
+			"wave"	"ambient\wind\wind_med2.wav"
+		}
+	}
+	"playrandom"
+	{
+		"time"		"6, 12"
+		"volume"	"0.1, 0.2"
+		"position" 	"2"
+		"rndwave"
+		{
+			"wave"	"ambient\wind\wind_med1.wav"
+			"wave"	"ambient\wind\wind_med2.wav"
+		}
+	}
+	
+	"playrandom"
+	{
+		"time"		"6, 12"
+		"volume"	"0.1, 0.2"
+		"position" 	"3"
+		"rndwave"
+		{
+			"wave"	"ambient\wind\wind_med1.wav"
+			"wave"	"ambient\wind\wind_med2.wav"
+		}
+	}
+
+//Tone
+	"playlooping"
+	{
+		"volume"	"0.5"
+		"pitch"		"100"
+		//"position"	"Random"
+		"soundlevel"	"SNDLVL_140dB"
+		"wave"		"ambient\ambience\crucial_underground_wet_loop.wav"
+	}	
+//Water lapping
+	"playlooping"
+	{
+		"volume"	"0.6"
+		"pitch"		"100"
+		"position"	"7"
+		"soundlevel"	"SNDLVL_140dB"
+		"wave"		"ambient\ambience\crucial_drainage_waterlaps_loop.wav"
+	}
+//Fan shafts --USE INDEPENDANT AREAS AS SOUND TARGETS, OR SUFFER THE CRASHING!
+	"playlooping"
+	{
+		"volume"	"0.3"
+		"pitch"		"100"
+		"position"	"4"
+		"soundlevel"	"SNDLVL_140dB"
+		"wave"		"ambient\ambience\crucial_ambience5.wav"
+	}
+	"playlooping"
+	{
+		"volume"	"0.3"
+		"pitch"		"100"
+		"position"	"5"
+		"soundlevel"	"SNDLVL_140dB"
+		"wave"		"ambient\ambience\crucial_ambience5.wav"
+	}
+
+}
+
+//"c17ep1.sewer.water.room"
+
+
+"c17ep1.sewer.outer"
+{
+	"dsp" "1"
+
+//Outside sounds
+	"playrandom"
+	{
+		"time"		"8, 18"
+		"volume"	"0.09, 0.2"
+		"pitch"		"90,105"
+		"soundlevel"	"SNDLVL_140dB"
+		"position" 	"random"
+		"rndwave"
+		{
+			"wave"	"ambient/levels/city/citadel_cloudhit1.wav"
+			"wave"	"ambient/levels/intro/Rhumble_1_42_07.wav"
+		}
+	}
+
+//Distant Leaks
+	"playrandom"
+	{
+		"time"		"4, 10"
+		"volume"	"0.01, 0.1"
+		"position" 	"random"
+		"rndwave"
+		{
+			"wave"	"ambient\water\distant_drip1.wav"
+			"wave"	"ambient\water\distant_drip2.wav"
+			"wave"	"ambient\water\distant_drip3.wav"
+			"wave"	"ambient\water\distant_drip4.wav"
+		}
+	}
+//Wind gusts -- SET THESE TO POINTS FOR TUNNEL ENDS. I.E: GATE BLOCKS. MMKAY
+	"playrandom"
+	{
+		"time"		"6, 12"
+		"volume"	"0.2, 0.3"
+		"position" 	"0"
+		"rndwave"
+		{
+			"wave"	"ambient\wind\wind_med1.wav"
+			"wave"	"ambient\wind\wind_med2.wav"
+		}
+	}
+	"playrandom"
+	{
+		"time"		"6, 12"
+		"volume"	"0.2, 0.3"
+		"position" 	"1"
+		"rndwave"
+		{
+			"wave"	"ambient\wind\wind_med1.wav"
+			"wave"	"ambient\wind\wind_med2.wav"
+		}
+	}
+	"playrandom"
+	{
+		"time"		"6, 12"
+		"volume"	"0.2, 0.3"
+		"position" 	"2"
+		"rndwave"
+		{
+			"wave"	"ambient\wind\wind_med1.wav"
+			"wave"	"ambient\wind\wind_med2.wav"
+		}
+	}
+	"playrandom"
+	{
+		"time"		"6, 12"
+		"volume"	"0.2, 0.3"
+		"position" 	"3"
+		"rndwave"
+		{
+			"wave"	"ambient\wind\wind_med1.wav"
+			"wave"	"ambient\wind\wind_med2.wav"
+		}
+	}
+	"playrandom"
+	{
+		"time"		"6, 12"
+		"volume"	"0.2, 0.3"
+		"position" 	"4"
+		"rndwave"
+		{
+			"wave"	"ambient\wind\wind_med1.wav"
+			"wave"	"ambient\wind\wind_med2.wav"
+		}
+	}
+//Tone
+	"playlooping"
+	{
+		"volume"	"0.07"
+		"pitch"		"100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_140dB"
+		"wave"		"ambient\water\crucial_smallroomtone_amb_loop.wav"
+	}
+}
+
+"c17ep1.subway.main"
+{
+	"dsp" "1"
+//Outside sounds
+	"playrandom"
+	{
+		"time"		"12, 15"
+		"volume"	"0.2, 0.4"
+		"pitch"		"90,105"
+		"soundlevel"	"SNDLVL_140dB"
+		"position" 	"random"
+		"rndwave"
+		{
+			"wave"	"ambient/levels/city/citadel_cloudhit1.wav"
+			"wave"	"ambient/levels/city/citadel_cloudhit2.wav"
+			"wave"	"ambient/levels/intro/Rhumble_1_42_07.wav"
+		}
+	}
+	
+	//stress sounds
+		"playrandom"
+	{
+		"time"		"12, 25"
+		"volume"	"0.35, 0.55"
+		"pitch"		"90,135"
+		"soundlevel"	"SNDLVL_140dB"
+		"position" 	"random"
+		"rndwave"
+		{
+			"wave"	"ambient\rhumble\lift_creak01.wav"
+			"wave"	"ambient\rhumble\lift_creak07.wav"
+			"wave"	"ambient\rhumble\random_rhumble03.wav"
+		}
+	}
+	
+	//Distant Leaks
+	"playrandom"
+	{
+		"time"		"4, 10"
+		"volume"	"0.5, 0.8"
+		"position" 	"random"
+		"rndwave"
+		{
+			"wave"	"ambient\water\distant_drip1.wav"
+			"wave"	"ambient\water\distant_drip2.wav"
+			"wave"	"ambient\water\distant_drip3.wav"
+			"wave"	"ambient\water\distant_drip4.wav"
+		}
+	}
+	
+		//stress sounds2
+		"playrandom"
+	{
+		"time"		"15, 35"
+		"volume"	"0.1, 0.25"
+		"pitch"		"90,105"
+		"soundlevel"	"SNDLVL_140dB"
+		"position" 	"random"
+		"rndwave"
+		{
+			"wave"	"ambient\debris\junk_debris_04.wav"
+			"wave"	"ambient\debris\junk_debris_03.wav"
+			"wave"	"ambient\debris\junk_debris_02.wav"
+		}
+	}
+
+//Distant FX
+	"playrandom"
+	{
+		"time"		"12, 25"
+		"volume"	"0.3, 0.4"
+		"pitch"		"90,105"
+		"soundlevel"	"SNDLVL_140dB"
+		"position" 	"random"
+		"rndwave"
+		{
+			"wave"	"ambient\distantfx\dist_explosion_01.wav"
+			"wave"	"ambient\distantfx\dist_explosion_03.wav"
+			"wave"	"ambient\distantfx\dist_explosion_04.wav"
+		}
+	}
+
+//Inside wind Gusts
+	"playrandom"
+	{
+		"time"		"8, 16"
+		"volume"	"0.2, 0.5"
+		"position" 	"random"
+		"rndwave"
+		{
+			"wave"	"ambient\levels\caves\rumble1.wav"
+			"wave"	"ambient\levels\caves\rumble2.wav"
+			"wave"	"ambient\levels\caves\rumble3.wav"
+		}
+	}
+//Men don't cry
+	"playrandom"
+	{
+		"time"		"35, 50"
+		"volume"	"0.01, 0.1"
+		"position" 	"random"
+		"rndwave"
+		{
+			"wave"	"ambient\voices\crying_loop1.wav"
+		}
+	}
+//tone sounds
+	"playlooping"
+	{
+		"volume"	"0.4"
+		"pitch"		"100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_140dB"
+		"wave"		"ambient\ambience\crucial_1a_communications_room_amb.wav"
+	}
+	
+		// Light humming
+		"playlooping"
+	{
+		"volume"	"0.4"
+		"pitch"		"100"
+		"position"	"1"
+		"soundlevel"	"SNDLVL_140dB"
+		"wave"		"ambient\ambience\fluorescent_light_humming.wav"
+	}
+	
+		"playlooping"
+	{
+		"volume"	"0.4"
+		"pitch"		"100"
+		"position"	"2"
+		"soundlevel"	"SNDLVL_140dB"
+		"wave"		"ambient\ambience\fluorescent_light_humming.wav"
+	}
+				"playlooping"
+	{
+		"volume"	"0.4"
+		"pitch"		"100"
+		"position"	"3"
+		"soundlevel"	"SNDLVL_140dB"
+		"wave"		"ambient\ambience\fluorescent_light_humming.wav"
+	}
+	//Water lapping
+	"playlooping"
+	{
+		"volume"	"0.6"
+		"pitch"		"100"
+		"position"	"7"
+		"soundlevel"	"SNDLVL_140dB"
+		"wave"		"ambient\ambience\crucial_drainage_waterlaps_loop.wav"
+	}
+}
+
+"c17ep1.subway.interoir"
+{
+	"dsp" "1"
+//Outside sounds
+	"playrandom"
+	{
+		"time"		"12, 15"
+		"volume"	"0.1, 0.2"
+		"pitch"		"90,105"
+		"soundlevel"	"SNDLVL_140dB"
+		"position" 	"random"
+		"rndwave"
+		{
+			"wave"	"ambient/levels/city/citadel_cloudhit1.wav"
+			"wave"	"ambient/levels/city/citadel_cloudhit2.wav"
+			"wave"	"ambient/levels/intro/Rhumble_1_42_07.wav"
+		}
+	}
+	
+	//Distant Leaks
+	"playrandom"
+	{
+		"time"		"4, 10"
+		"volume"	"0.5, 0.8"
+		"position" 	"random"
+		"rndwave"
+		{
+			"wave"	"ambient\water\distant_drip1.wav"
+			"wave"	"ambient\water\distant_drip2.wav"
+			"wave"	"ambient\water\distant_drip3.wav"
+			"wave"	"ambient\water\distant_drip4.wav"
+		}
+	}
+
+//Distant FX
+	"playrandom"
+	{
+		"time"		"12, 25"
+		"volume"	"0.1, 0.2"
+		"pitch"		"90,105"
+		"soundlevel"	"SNDLVL_140dB"
+		"position" 	"random"
+		"rndwave"
+		{
+			"wave"	"ambient\distantfx\dist_explosion_01.wav"
+			"wave"	"ambient\distantfx\dist_explosion_03.wav"
+			"wave"	"ambient\distantfx\dist_explosion_04.wav"
+		}
+	}
+
+//Inside wind Gusts
+	"playrandom"
+	{
+		"time"		"8, 16"
+		"volume"	"0.08, 0.25"
+		"position" 	"random"
+		"rndwave"
+		{
+			"wave"	"ambient\levels\caves\rumble1.wav"
+			"wave"	"ambient\levels\caves\rumble2.wav"
+			"wave"	"ambient\levels\caves\rumble3.wav"
+		}
+	}
+//Men don't cry
+	"playrandom"
+	{
+		"time"		"35, 50"
+		"volume"	"0.01, 0.05"
+		"position" 	"random"
+		"rndwave"
+		{
+			"wave"	"ambient\voices\crying_loop1.wav"
+		}
+	}
+//tone sounds
+	"playlooping"
+	{
+		"volume"	"0.35"
+		"pitch"		"100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_140dB"
+		"wave"		"ambient\ambience\crucial_1a_communications_room_amb.wav"
+	}
+}

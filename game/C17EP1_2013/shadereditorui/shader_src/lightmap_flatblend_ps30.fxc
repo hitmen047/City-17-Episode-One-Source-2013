@@ -1,0 +1,122 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Combos
+// DYNAMIC: "FLASHLIGHT"		"0..1"
+// DYNAMIC: "FLASHLIGHTDEPTHFILTERMODE"		"0..2"
+// DYNAMIC: "FLASHLIGHTSHADOWS"		"0..1"
+// DYNAMIC: "PIXELFOGTYPE"		"0..1"
+// DYNAMIC: "WRITEWATERFOGTODESTALPHA"		"0..1"
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+sampler _Sampler_01		: register( s1 );
+sampler _Sampler_02		: register( s2 );
+sampler _Sampler_03		: register( s3 );
+sampler _gSampler_Flashlight_Cookie		: register( s4 );
+sampler _gSampler_Flashlight_Depth		: register( s5 );
+sampler _gSampler_Flashlight_Random		: register( s6 );
+sampler _Sampler_07		: register( s7 );
+sampler _Sampler_08		: register( s8 );
+
+// Constants
+const float3 _g_VecOrig		: register( c16 );
+const float3 g_cData_envmaptint		: register( c17 ); 		// Static
+const float4x4 g_cFlashlightWorldToTexture		: register( c12 );
+const float3 g_cData_blend2tint		: register( c18 ); 		// Static
+const float g_cData_blendmaskstrength		: register( c19 ); 		// Static
+const float g_cData_blendmasknoise		: register( c20 ); 		// Static
+const float4 _g_FogParams		: register( c21 );
+const float4 g_cFlashlightAttenuationFactors		: register( c8 );
+const float4 g_cFlashlightPos		: register( c9 );
+const float4 g_cShadowTweaks		: register( c7 );
+
+// Arrays
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+	float2 vTexCoord_1			:	TEXCOORD1;
+	float3 vTexCoord_2			:	TEXCOORD2;
+	float3 vTexCoord_3			:	TEXCOORD3;
+	float4 vTexCoord_4			:	TEXCOORD4;
+	float4 vColor_0				:	COLOR0;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float3 _var0 = float3( 0.000000, 0.000000, 0.000000 );
+	float3 _var1 = In.vTexCoord_3 - _g_VecOrig;
+	float4 _texLookup_27 = tex2D( _Sampler_00, In.vTexCoord_0 );
+	float3 _var2 = _texLookup_27.rgb;
+	float _var3 = _texLookup_27.a;
+	float3 _var4 = tex2D( _Sampler_01, In.vTexCoord_0 ).rgb;
+	float3 _var5 = tex2D( _Sampler_02, In.vTexCoord_0 ).rgb;
+	float3 _var6 = clamp( g_cData_blend2tint, float3( 1.000000, 1.000000, 1.000000 ), float3( 25.000000, 25.000000, 25.000000 ) );
+	float _var7 = tex2D( _Sampler_03, In.vTexCoord_0 ).g;
+	float _var8 = tex2D( _Sampler_03, In.vTexCoord_0 ).g;
+	float _var9 = _g_VecOrig.z;
+	float _var10 = In.vTexCoord_3.z;
+	float _var11 = In.vTexCoord_4.z;
+	float _var12 = In.vColor_0.w;
+	_var2 = _var2 * float( 2.000000 );
+#if ( FLASHLIGHT == 1 )
+		float4 _var13 = mul( float4(In.vTexCoord_3.xyz,1), g_cFlashlightWorldToTexture );
+		float2 _var14 = In.vTexCoord_4.xy;
+		float _var15 = In.vTexCoord_4.w;
+		_var14 = _var14 / _var15;
+		_var14 = _var14 * float( 0.500000 );
+		_var14 = _var14 + float( 0.500000 );
+		float3 _var16 = DoFlashlight( g_cFlashlightPos.xyz, In.vTexCoord_3, _var13, In.vTexCoord_2,
+				g_cFlashlightAttenuationFactors.xyz, g_cFlashlightAttenuationFactors.w,
+				_gSampler_Flashlight_Cookie, _gSampler_Flashlight_Depth, _gSampler_Flashlight_Random,
+				FLASHLIGHTDEPTHFILTERMODE, FLASHLIGHTSHADOWS, true,
+				_var14, false, g_cShadowTweaks );
+		_var0 = _var16;
+#endif
+	_var2 = _var2 - float( 1.000000 );
+	_var5 = _var5 * _var6;
+	_var7 = _var7 * g_cData_blendmaskstrength;
+	_var8 = _var8 * g_cData_blendmasknoise;
+	_var9 = CalcPixelFogFactor( PIXELFOGTYPE, _g_FogParams, _var9, _var10, _var11 );
+#if ( FLASHLIGHT == 0 )
+		float3 _var17 = tex2D( _Sampler_07, In.vTexCoord_1 ).rgb;
+		_var1 = reflect( _var1, _var2 );
+		_var17 = _var17 * LIGHT_MAP_SCALE;
+		float3 _var18 = texCUBE( _Sampler_08, _var1 ).rgb;
+		_var0 = _var17;
+		_var18 = _var18 * float( 0.040000 );
+		_var18 = _var18 * ENV_MAP_SCALE;
+		_var18 = _var18 * _var3;
+		_var18 = _var18 * g_cData_envmaptint;
+		_var0 = _var18;
+#endif
+	_var0 = _var0;
+	_var8 = float( 0.900000 ) - _var8;
+	_var7 = _var7 * _var8;
+	_var5 = _var5 * _var7;
+	_var4 = _var4 + _var5;
+	_var0 = _var0 + _var4;
+	_var0 = _var0 * float( 1.000000 );
+	float4 _var19 = float4( _var0.x, _var0.y, _var0.z, 1.000000 );
+	_var19 = FinalOutput( _var19, _var9, PIXELFOGTYPE, TONEMAP_SCALE_LINEAR, true, _var11 );
+	Out.vColor_0 = _var19;
+	return Out;
+}

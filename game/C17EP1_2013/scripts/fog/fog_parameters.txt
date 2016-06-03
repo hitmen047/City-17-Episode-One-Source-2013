@@ -1,0 +1,239 @@
+//1/4 Life: This file contains the values for various fog settings. The 4th value (alpha) of primarycolor or secondarycolor will not be used, and may be set to any value.
+"fog_parameters.txt"
+{
+	//===============================================================================
+	//These are the names used by the environment volume for choosing fog parameters.
+	//===============================================================================
+
+	//Main
+	"City17_fog_default"
+	{
+		"primarycolor"		"210 176 130 255"
+		"secondarycolor"	"100 80 74 255"
+		"start"			"300"
+		"end"			"9000"
+		"density"		"0.9"
+		"farZ" 			"99999"
+		"lerpspeed"		"6"
+	}
+	"City17_fog_light"
+	{
+		"primarycolor"		"210 176 130 255"
+		"secondarycolor"	"100 80 74 255"
+		"start"			"200"
+		"end"			"8000"
+		"density"		"0.8"
+		"farZ" 			"99999"
+		"lerpspeed"		"5"
+	}
+	"City17_fog_normal"
+	{
+		"primarycolor"		"210 176 130 255"
+		"secondarycolor"	"100 80 74 255"
+		"start"			"200"
+		"end"			"7000"
+		"density"		"0.9"
+		"farZ" 			"99999"
+		"lerpspeed"		"8"
+	}
+	"City17_fog_heavy"
+	{
+		"primarycolor"		"210 176 130 255"
+		"secondarycolor"	"210 176 130 255"
+		"start"			"200"
+		"end"			"5500"
+		"density"		"1.0"
+		"farZ" 			"6200"
+		"lerpspeed"		"11"
+	}
+		"City17_fog_heavy-old"
+	{
+		"primarycolor"		"210 176 130 255"
+		"secondarycolor"	"210 176 130 255"
+		"start"			"128"
+		"end"			"6000"
+		"density"		"1.0"
+		"farZ" 			"99999"
+		"lerpspeed"		"11"
+	}
+
+	//Map 2b
+	"sewers_fog_light"
+	{
+		"primarycolor"		"31 39 50 255"
+		"secondarycolor"	"73 67 67 255"
+		"start"			"300"
+		"end"			"1256"
+		"density"		"0.6"
+		"farZ" 			"99999"
+		"lerpspeed"		"0.01"
+	}
+	"sewers_fog_normal"
+	{
+		"primarycolor"		"27 41 52 255"
+		"secondarycolor"	"27 41 52 255"
+		"start"			"64"
+		"end"			"3500"
+		"density"		"0.55"
+		"farZ" 			"6000"
+		"lerpspeed"		"0.01"
+	}
+	"subway_fog_normal"
+	{
+		"primarycolor"		"47 45 43 255"
+		"secondarycolor"	"73 67 67 255"
+		"start"			"-1"
+		"end"			"2048"
+		"density"		"0.3"
+		"farZ" 			"99999"
+		"lerpspeed"		"0.01"
+	}
+		"subway_fog_interiors"
+	{
+		"primarycolor"		"47 45 43 255"
+		"secondarycolor"	"73 67 67 255"
+		"start"			"-1"
+		"end"			"1512"
+		"density"		"0.45"
+		"farZ" 			"99999"
+		"lerpspeed"		"0.01"
+	}
+	"subway_arema_fog"
+	{
+		"primarycolor"		"47 45 43 255"
+		"secondarycolor"	"73 67 67 255"
+		"start"			"-1"
+		"end"			"912"
+		"density"		"0.55"
+		"farZ" 			"3000"
+		"lerpspeed"		"8"
+	}
+		"subway_newsub_fog"
+	{
+		"primarycolor"		"47 45 43 255"
+		"secondarycolor"	"73 67 67 255"
+		"start"			"-1"
+		"end"			"912"
+		"density"		"0.55"
+		"farZ" 			"3000"
+		"lerpspeed"		"8"
+	}
+	"apartments_smoke_normal"
+	{
+		"primarycolor"		"49 49 49 255"
+		"secondarycolor"	"55 46 45 255"
+		"start"			"-256"
+		"end"			"40"
+		"density"		"0.6"
+		"farZ" 			"99999"
+		"lerpspeed"		"0.01"
+	}
+	"apartments_smoke_heavy"
+	{
+		"primarycolor"		"49 49 49 255"
+		"secondarycolor"	"55 46 45 255"
+		"start"			"-256"
+		"end"			"12"
+		"density"		"0.7"
+		"farZ" 			"99999"
+		"lerpspeed"		"0.01"
+	}
+	
+	
+	//map2c
+	"shaft_smoke_normal"
+	{
+		"primarycolor"		"49 49 49 255"
+		"secondarycolor"	"55 46 45 255"
+		"start"			"28"
+		"end"			"740"
+		"density"		"0.4"
+		"farZ" 			"20000"
+		"lerpspeed"		"7"
+	}
+		"interiors_fog_light"
+	{
+		"primarycolor"		"49 49 49 255"
+		"secondarycolor"	"55 46 45 255"
+		"start"			"128"
+		"end"			"1500"
+		"density"		"0.65"
+		"farZ" 			"20000"
+		"lerpspeed"		"6"
+	}
+			"interiors_fog_med"
+	{
+		"primarycolor"		"49 49 49 255"
+		"secondarycolor"	"55 46 45 255"
+		"start"			"128"
+		"end"			"900"
+		"density"		"0.75"
+		"farZ" 			"20000"
+		"lerpspeed"		"6"
+	}
+	
+	
+	//map 3
+		"garage_fog_main"
+	{
+		"primarycolor"		"57 42 40 255"
+		"secondarycolor"	"55 46 45 255"
+		"start"			"-1"
+		"end"			"4000"
+		"density"		"0.45"
+		"farZ" 			"20000"
+		"lerpspeed"		"6"
+	}
+	
+	//map 4
+	"City17_fog_ep1"
+	{
+		"primarycolor"		"210 176 130 255"
+		"secondarycolor"	"100 80 74 255"
+		"start"			"300"
+		"end"			"9500"
+		"density"		"0.9"
+		"farZ" 			"20000"
+		"lerpspeed"		"0.01"
+	}
+	"City17_fog_outerstreets"
+	{
+		"primarycolor"		"210 176 130 255"
+		"secondarycolor"	"100 80 74 255"
+		"start"			"300"
+		"end"			"9000"
+		"density"		"0.9"
+		"farZ" 			"20000"
+		"lerpspeed"		"0.01"
+	}
+		"City17_fog_outerstreets-officearea"
+	{
+		"primarycolor"		"210 176 130 255"
+		"secondarycolor"	"100 80 74 255"
+		"start"			"250"
+		"end"			"6000"
+		"density"		"0.9"
+		"farZ" 			"14500"
+		"lerpspeed"		"0.01"
+	}
+			"City17_fog_office"
+	{
+		"primarycolor"		"220 176 130 255"
+		"secondarycolor"	"100 80 74 255"
+		"start"			"-1"
+		"end"			"1860"
+		"density"		"0.4"
+		"farZ" 			"3100"
+		"lerpspeed"		"0.01"
+	}
+		"City17_fog_heavy-smokey"
+	{
+		"primarycolor"		"212 176 133 255"
+		"secondarycolor"	"100 80 74 255"
+		"start"			"128"
+		"end"			"3800"
+		"density"		"1.0"
+		"farZ" 			"20000"
+		"lerpspeed"		"11"
+	}
+}

@@ -1,0 +1,98 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+
+
+// Combos
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+sampler _Sampler_01		: register( s1 );
+sampler _Sampler_02		: register( s2 );
+
+// Constants
+const float3 _g_VecOrig		: register( c16 );
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+	float4x4 vTexCoord_1		:	TEXCOORD1;
+	float4 vTexCoord_5			:	TEXCOORD5;
+	float3 vTexCoord_6			:	TEXCOORD6;
+	float3 vTexCoord_7			:	TEXCOORD7;
+	float3 vColor_0				:	COLOR0;
+	float3 vColor_1				:	COLOR1;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float2 _var0 = In.vTexCoord_5.xy;
+	float _var1 = In.vTexCoord_5.w;
+	float3 _var2 = tex2D( _Sampler_00, In.vTexCoord_0 ).rgb;
+	float3x3 _var3 = { In.vColor_0,
+				In.vColor_1,
+				In.vTexCoord_7 };
+	float3 _var4 = normalize( In.vTexCoord_6 );
+	float _var5 = In.vTexCoord_5.z;
+	_var0 = _var0 / _var1;
+	_var2 = lerp( _var2, float3( 0.500000, 0.500000, 1.000000 ), float( 1.000000 ) );
+	_var5 = smoothstep( float( 1.000000 ), float( 2.500000 ), _var5 );
+	_var0 = _var0 * float2( 0.500000, -0.500000 );
+	_var2 = _var2 * float( 2.000000 );
+	_var5 = _var5 * float( 0.800000 );
+	_var0 = _var0 + float( 0.500000 );
+	_var2 = _var2 - float( 1.000000 );
+	_var2 = mul( _var2, _var3 );
+	_var2 = normalize( _var2 );
+	float3 _var6 = _var2 + _g_VecOrig;
+	float _var7 = dot( _var2, _var4 );
+	float3 _var8 = reflect( _var4, _var2 );
+	float4 _var9 = mul( float4(_var6.xyz,1), In.vTexCoord_1 );
+	float _var10 = smoothstep( float( -0.050000 ), float( -0.100000 ), _var7 );
+	float _var11 = abs( _var7 );
+	float3 _var12 = texCUBE( _Sampler_01, _var8 ).rgb;
+	float _var13 = smoothstep( float( -1.000000 ), float( -0.500000 ), _var7 );
+	float _var14 = smoothstep( float( 0.100000 ), float( -0.500000 ), _var7 );
+	float2 _var15 = _var9.xy;
+	float _var16 = _var9.w;
+	_var11 = 1.0f - _var11;
+	_var12 = _var12 * ENV_MAP_SCALE;
+	_var13 = min( _var13, _var14 );
+	_var15 = _var15 / _var16;
+	_var11 = _var11 * float( 0.100000 );
+	_var13 = _var13 * float( 0.500000 );
+	_var15 = _var15 * _var10;
+	float _var17 = _var11 + float( 0.005000 );
+	float _var18 = _var11 + float( 0.010000 );
+	float _var19 = _var11 + float( 0.015000 );
+	_var15 = _var15 * float2( -1.000000, 1.000000 );
+	float2 _var20 = _var15 * _var17;
+	float2 _var21 = _var15 * _var18;
+	float2 _var22 = _var15 * _var19;
+	_var20 = _var0 - _var20;
+	_var21 = _var0 - _var21;
+	_var22 = _var0 - _var22;
+	float _var23 = tex2D( _Sampler_02, _var20 ).r;
+	float _var24 = tex2D( _Sampler_02, _var21 ).g;
+	float _var25 = tex2D( _Sampler_02, _var22 ).b;
+	float2 _var26 = float2( _var23, _var24 );
+	float3 _var27 = float3( _var26, _var25 );
+	_var27 = lerp( _var27, _var12, _var13 );
+	float4 _var28 = float4( _var27, _var5 );
+	Out.vColor_0 = _var28;
+	return Out;
+}

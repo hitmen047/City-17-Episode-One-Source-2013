@@ -1,0 +1,127 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+sampler _Sampler_01		: register( s1 );
+
+// Constants
+const float2 _g_TexelSize		: register( c16 );
+
+// Arrays
+static const float2 g_cArray_1805[4] =
+{
+	float2( -2.000000f, 2.000000f ),
+	float2( 15.000000f, -15.000000f ),
+	float2( -15.000000f, 15.000000f ),
+	float2( 15.000000f, 15.000000f ),
+};
+static const float g_cArray_1807[3] =
+{
+	float( 0.196842f ),
+	float( 0.606316f ),
+	float( 0.196842f ),
+};
+static const float g_cArray_1795[3] =
+{
+	float( 0.196842f ),
+	float( 0.606316f ),
+	float( 0.196842f ),
+};
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float4 _var0 = float4( 0.000000, 0.000000, 0.000000, 0.000000 );
+	float4 _var1 = float4( 0.000000, 0.000000, 0.000000, 0.000000 );
+	float4 _var2 = float4( 0.000000, 0.000000, 0.000000, 0.000000 );
+	float4 _var3 = float4( 0.000000, 0.000000, 0.000000, 0.000000 );
+	float2 _var4 = In.vTexCoord_0;
+	float _var5 = float( -9.000000 ) * float( 1.000000 );
+	float2 _var6 = _g_TexelSize * float( 0.250000 );
+	float _var7 = float( 1.000000 ) * float( 1.000000 );
+	float4 _var8 = tex2D( _Sampler_00, In.vTexCoord_0 ).rgba;
+	_var4 = _var4 * float2( 1.000000, 1.000000 );
+	_var5 = _var5 / float( 512.000000 );
+	_var6 = In.vTexCoord_0 + _var6;
+	float _var9 = _var5;
+	for ( int _var10 = 0; _var10 < 16; _var10++ )
+	{
+		_var9 = abs( _var9 );
+		float2 _var11 = float2( 0.999900, 0.999900 ) - _var9;
+		{
+			float2 center_def = float2( 0.5f, 0.5f );
+			float rot_def = float( 0.0f );
+			float2 trans_def = float2( 0.0f, 0.0f );
+			float fs = sin( rot_def );
+			float fc = cos( rot_def );
+			float4 row_0 = float4( fc * _var11.x, -fs * _var11.x, 0, ( -center_def.x * fc + center_def.y * fs ) * _var11.x + center_def.x + trans_def.x );
+			float4 row_1 = float4( fs * _var11.y, fc * _var11.y, 0, ( -center_def.x * fs - center_def.y * fc ) * _var11.y + center_def.y + trans_def.y );
+			_var4.x = dot( float4( _var4, 0, 1 ), row_0 );
+			_var4.y = dot( float4( _var4, 0, 1 ), row_1 );
+		}
+		float4 _var12 = tex2D( _Sampler_01, _var4 ).rgba;
+		_var3 = _var3 + _var12;
+	}
+	_var3 = _var3 / float( 16.000000 );
+	_var3 = _var3 * float( 0.840000 );
+	for ( int _var13 = 0; _var13 < 4; _var13++ )
+	{
+		float2 _var14 = _var6;
+		float2 _var15 = g_cArray_1805[_var13] * _g_TexelSize;
+		_var14 = _var14 + _var15;
+		float4 _var16 = tex2D( _Sampler_01, _var14 ).rgba;
+		_var16 = _var16 * float( 0.550000 );
+		_var3 = _var3 + _var16;
+		_var2 = _var2 + _var3;
+	}
+	_var2 = _var2 * float( 2.000000 );
+	for ( int _var17 = 0; _var17 < 3; _var17++ )
+	{
+		_var2 = _var2 * g_cArray_1807[_var17];
+		_var1 = _var1 + _var2;
+	}
+	_var1 = _var1 * float( 2.000000 );
+	for ( int _var18 = 0; _var18 < 3; _var18++ )
+	{
+		_var1 = _var1 * g_cArray_1795[_var18];
+		_var0 = _var0 + _var1;
+	}
+	_var0 = _var0 / float( 5.500000 );
+	float4 _var19 = _var0 * float( 3.000000 );
+	float4 _var20 = 1.0f - _var0;
+	_var19 = clamp( _var19, float( 0.000000 ), float( 3.000000 ) );
+	_var20 = abs( _var20 );
+	float4 _var21 = float( 1.000000 ) * _var19;
+	_var21 = lerp( float( 0.000000 ), _var21, _var7 );
+	_var21 = _var21 * float( 1.000000 );
+	_var21 = _var19 * _var21;
+	_var21 = _var21 * _var20;
+	float4 _var22 = float4( _var21.x, _var21.y, _var21.z, 1.000000 );
+	_var8 = _var8 + _var21;
+	_var8 = float4( _var8.x, _var8.y, _var8.z, 1.000000 );
+	Out.vColor_0 = _var8;
+	return Out;
+}

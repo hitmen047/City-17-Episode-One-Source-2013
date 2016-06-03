@@ -1,0 +1,4 @@
+"paths"
+{
+	"compiler"	"sourcesdk\bin\source2007\bin"
+}

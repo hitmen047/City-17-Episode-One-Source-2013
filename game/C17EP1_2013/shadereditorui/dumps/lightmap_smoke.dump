@@ -1,0 +1,343 @@
+"lightmap_smoke"
+{
+	"vs_name"		"lightmap_smoke_vs30"
+	"ps_name"		"lightmap_smoke_ps30"
+	"i_sm"		"1"
+	"i_cull"		"1"
+	"i_ablend"		"1"
+	"fl_atestref"		"0.500000"
+	"i_dtest"		"1"
+	"i_dwrite"		"0"
+	"i_srgbw"		"1"
+	"i_vfmt_flags"		"3"
+	"i_vfmt_texcoords"		"2"
+	"i_vfmt_udata"		"0"
+	"i_vlit"		"0"
+	"i_vrefract"		"0"
+	"identifiers_VS"
+	{
+		"i_numdcombos"		"1"
+	}
+	"identifiers_PS"
+	{
+		"combo_0"
+		{
+			"sz_name"		"FLASHLIGHT"
+			"i_static"		"0"
+			"i_min"		"0"
+			"i_max"		"1"
+			"i_type"		"9"
+		}
+		"combo_1"
+		{
+			"sz_name"		"FLASHLIGHTDEPTHFILTERMODE"
+			"i_static"		"0"
+			"i_min"		"0"
+			"i_max"		"2"
+			"i_type"		"10"
+		}
+		"combo_2"
+		{
+			"sz_name"		"FLASHLIGHTSHADOWS"
+			"i_static"		"0"
+			"i_min"		"0"
+			"i_max"		"1"
+			"i_type"		"11"
+		}
+		"combo_3"
+		{
+			"sz_name"		"PIXELFOGTYPE"
+			"i_static"		"0"
+			"i_min"		"0"
+			"i_max"		"1"
+			"i_type"		"7"
+		}
+		"combo_4"
+		{
+			"sz_name"		"WRITEWATERFOGTODESTALPHA"
+			"i_static"		"0"
+			"i_min"		"0"
+			"i_max"		"1"
+			"i_type"		"8"
+		}
+		"econst_0"
+		{
+			"i_envconstidx"		"11"
+			"i_normregister"		"-1"
+			"i_econstsize"		"4"
+			"i_smartcomps"		"3"
+			"fl_smartdefault_00"		"0.000000"
+			"fl_smartdefault_01"		"0.000000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_1"
+		{
+			"i_envconstidx"		"0"
+			"i_normregister"		"0"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"3"
+			"fl_smartdefault_00"		"0.000000"
+			"fl_smartdefault_01"		"0.000000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_2"
+		{
+			"i_envconstidx"		"15"
+			"i_normregister"		"1"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"1"
+			"sz_smartname"		"warp_directions1"
+			"fl_smartdefault_00"		"0.000000"
+			"fl_smartdefault_01"		"-0.140000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_3"
+		{
+			"i_envconstidx"		"15"
+			"i_normregister"		"2"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"0"
+			"sz_smartname"		"warp_strength1"
+			"fl_smartdefault_00"		"1.000000"
+			"fl_smartdefault_01"		"0.000000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_4"
+		{
+			"i_envconstidx"		"15"
+			"i_normregister"		"3"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"1"
+			"sz_smartname"		"warp_directions2"
+			"fl_smartdefault_00"		"-0.080000"
+			"fl_smartdefault_01"		"0.080000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_5"
+		{
+			"i_envconstidx"		"15"
+			"i_normregister"		"4"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"0"
+			"sz_smartname"		"warp_strength2"
+			"fl_smartdefault_00"		"1.000000"
+			"fl_smartdefault_01"		"0.000000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_6"
+		{
+			"i_envconstidx"		"15"
+			"i_normregister"		"5"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"0"
+			"sz_smartname"		"smokemask_topstrength"
+			"fl_smartdefault_00"		"0.150000"
+			"fl_smartdefault_01"		"0.000000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_7"
+		{
+			"i_envconstidx"		"15"
+			"i_normregister"		"6"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"1"
+			"sz_smartname"		"warp_amount"
+			"fl_smartdefault_00"		"5.000000"
+			"fl_smartdefault_01"		"11.000000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_8"
+		{
+			"i_envconstidx"		"15"
+			"i_normregister"		"7"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"1"
+			"sz_smartname"		"smokemask1_scale"
+			"fl_smartdefault_00"		"0.500000"
+			"fl_smartdefault_01"		"0.500000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_9"
+		{
+			"i_envconstidx"		"15"
+			"i_normregister"		"8"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"1"
+			"sz_smartname"		"smokemask1_scrollrate"
+			"fl_smartdefault_00"		"-0.200000"
+			"fl_smartdefault_01"		"0.200000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_10"
+		{
+			"i_envconstidx"		"15"
+			"i_normregister"		"9"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"1"
+			"sz_smartname"		"smokemask2_scale"
+			"fl_smartdefault_00"		"0.500000"
+			"fl_smartdefault_01"		"0.500000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_11"
+		{
+			"i_envconstidx"		"15"
+			"i_normregister"		"10"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"1"
+			"sz_smartname"		"smokemask2_scrollrate"
+			"fl_smartdefault_00"		"-0.300000"
+			"fl_smartdefault_01"		"0.200000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_12"
+		{
+			"i_envconstidx"		"15"
+			"i_normregister"		"11"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"0"
+			"sz_smartname"		"smokemask_subtractamount"
+			"fl_smartdefault_00"		"0.200000"
+			"fl_smartdefault_01"		"0.000000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_13"
+		{
+			"i_envconstidx"		"15"
+			"i_normregister"		"12"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"0"
+			"sz_smartname"		"smokemask_bottomstrength"
+			"fl_smartdefault_00"		"5.000000"
+			"fl_smartdefault_01"		"0.000000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_14"
+		{
+			"i_envconstidx"		"12"
+			"i_normregister"		"0"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"3"
+			"fl_smartdefault_00"		"0.000000"
+			"fl_smartdefault_01"		"0.000000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"texsamp_0"
+		{
+			"sz_param"		"smoke_color1"
+			"sz_fallback"		"white"
+			"i_sampidx"		"0"
+			"i_texmode"		"0"
+			"i_cubemap"		"0"
+			"i_srgb"		"0"
+		}
+		"texsamp_1"
+		{
+			"sz_param"		"smoke_color2"
+			"sz_fallback"		"white"
+			"i_sampidx"		"1"
+			"i_texmode"		"0"
+			"i_cubemap"		"0"
+			"i_srgb"		"1"
+		}
+		"texsamp_2"
+		{
+			"sz_fallback"		"Lights\White"
+			"i_sampidx"		"2"
+			"i_texmode"		"3"
+			"i_cubemap"		"0"
+			"i_srgb"		"1"
+		}
+		"texsamp_3"
+		{
+			"i_sampidx"		"3"
+			"i_texmode"		"10"
+			"i_cubemap"		"0"
+			"i_srgb"		"1"
+		}
+		"texsamp_4"
+		{
+			"i_sampidx"		"4"
+			"i_texmode"		"11"
+			"i_cubemap"		"0"
+			"i_srgb"		"0"
+		}
+		"texsamp_5"
+		{
+			"i_sampidx"		"5"
+			"i_texmode"		"12"
+			"i_cubemap"		"0"
+			"i_srgb"		"0"
+		}
+		"texsamp_6"
+		{
+			"sz_param"		"warptexture1"
+			"sz_fallback"		"white"
+			"i_sampidx"		"6"
+			"i_texmode"		"0"
+			"i_cubemap"		"0"
+			"i_srgb"		"0"
+		}
+		"texsamp_7"
+		{
+			"sz_param"		"warptexture2"
+			"sz_fallback"		"white"
+			"i_sampidx"		"7"
+			"i_texmode"		"0"
+			"i_cubemap"		"0"
+			"i_srgb"		"0"
+		}
+		"texsamp_8"
+		{
+			"sz_param"		"mask"
+			"sz_fallback"		"white"
+			"i_sampidx"		"8"
+			"i_texmode"		"0"
+			"i_cubemap"		"0"
+			"i_srgb"		"0"
+		}
+		"texsamp_9"
+		{
+			"sz_param"		"warptexture1"
+			"sz_fallback"		"white"
+			"i_sampidx"		"9"
+			"i_texmode"		"1"
+			"i_cubemap"		"0"
+			"i_srgb"		"0"
+		}
+		"texsamp_10"
+		{
+			"sz_param"		"mask2"
+			"sz_fallback"		"white"
+			"i_sampidx"		"10"
+			"i_texmode"		"0"
+			"i_cubemap"		"0"
+			"i_srgb"		"0"
+		}
+		"texsamp_11"
+		{
+			"sz_param"		"basetexture2"
+			"sz_fallback"		"white"
+			"i_sampidx"		"11"
+			"i_texmode"		"0"
+			"i_cubemap"		"0"
+			"i_srgb"		"0"
+		}
+		"i_numdcombos"		"48"
+	}
+}

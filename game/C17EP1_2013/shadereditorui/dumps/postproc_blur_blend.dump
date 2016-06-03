@@ -1,0 +1,52 @@
+"postproc_blur_blend"
+{
+	"vs_name"		"postproc_blur_blend_vs30"
+	"ps_name"		"postproc_blur_blend_ps30"
+	"i_sm"		"1"
+	"i_cull"		"0"
+	"i_ablend"		"0"
+	"fl_atestref"		"0.500000"
+	"i_dtest"		"0"
+	"i_dwrite"		"0"
+	"i_srgbw"		"0"
+	"i_vfmt_flags"		"1"
+	"i_vfmt_texcoords"		"1"
+	"i_vfmt_udata"		"0"
+	"i_vlit"		"0"
+	"i_vrefract"		"1"
+	"identifiers_VS"
+	{
+		"i_numdcombos"		"1"
+	}
+	"identifiers_PS"
+	{
+		"econst_0"
+		{
+			"i_envconstidx"		"16"
+			"i_normregister"		"0"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"0"
+			"sz_smartname"		"Mutable_01"
+			"fl_smartdefault_00"		"0.000000"
+			"fl_smartdefault_01"		"0.000000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"texsamp_0"
+		{
+			"i_sampidx"		"0"
+			"i_texmode"		"5"
+			"i_cubemap"		"0"
+			"i_srgb"		"0"
+		}
+		"texsamp_1"
+		{
+			"sz_fallback"		"white"
+			"i_sampidx"		"1"
+			"i_texmode"		"1"
+			"i_cubemap"		"0"
+			"i_srgb"		"0"
+		}
+		"i_numdcombos"		"1"
+	}
+}

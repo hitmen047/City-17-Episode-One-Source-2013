@@ -1,0 +1,779 @@
+"canvas"
+{
+	"Nodes"
+	{
+		"Node_000"
+		{
+			"iType"		"1"
+			"pos_x"		"-320.000000"
+			"pos_y"		"190.000000"
+			"size_x"		"55.000000"
+			"size_y"		"-28.000000"
+			"iPreview"		"0"
+			"enable_flex"		"0"
+			"enable_normal"		"0"
+			"enable_blendweights"		"0"
+			"enable_tangentspace"		"0"
+			"enable_tangentspace_skinning"		"0"
+			"numTexcoords"		"1"
+			"numColor"		"0"
+		}
+		"Node_001"
+		{
+			"iType"		"2"
+			"pos_x"		"265.000000"
+			"pos_y"		"190.000000"
+			"size_x"		"55.000000"
+			"size_y"		"-28.000000"
+			"iPreview"		"0"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"2"
+					"iTarget_jack"		"0"
+				}
+				"jackIn_01"
+				{
+					"iTarget_node"		"0"
+					"iTarget_jack"		"1"
+				}
+			}
+			"numTexcoords"		"1"
+			"numColor"		"0"
+			"numTexcoord_Flag_0"		"2"
+			"numTexcoord_Flag_1"		"2"
+			"numTexcoord_Flag_2"		"2"
+			"numTexcoord_Flag_3"		"2"
+			"numTexcoord_Flag_4"		"2"
+			"numTexcoord_Flag_5"		"2"
+			"numTexcoord_Flag_6"		"2"
+			"numTexcoord_Flag_7"		"2"
+			"numColor_Flag_0"		"8"
+			"numColor_Flag_1"		"8"
+		}
+		"Node_002"
+		{
+			"iType"		"27"
+			"pos_x"		"-44.526688"
+			"pos_y"		"206.208878"
+			"size_x"		"80.000000"
+			"size_y"		"-17.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"0"
+					"iTarget_jack"		"0"
+				}
+			}
+			"swizzleString"		"x y z 1"
+		}
+		"Node_003"
+		{
+			"iType"		"32"
+			"pos_x"		"46.667267"
+			"pos_y"		"80.186264"
+			"size_x"		"50.000000"
+			"size_y"		"-50.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"4"
+					"iTarget_jack"		"0"
+				}
+			}
+		}
+		"Node_004"
+		{
+			"iType"		"5"
+			"pos_x"		"-54.299839"
+			"pos_y"		"77.126663"
+			"size_x"		"50.000000"
+			"size_y"		"-50.000000"
+			"iPreview"		"1"
+			"szConstantString"		"0 0 0 0"
+		}
+		"Node_005"
+		{
+			"iType"		"29"
+			"szName"		"Framebuffer"
+			"pos_x"		"206.965805"
+			"pos_y"		"-132.748062"
+			"size_x"		"122.000000"
+			"size_y"		"-80.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"6"
+					"iTarget_jack"		"0"
+				}
+			}
+			"iSRGB"		"0"
+			"iTextureType"		"5"
+			"IsCubemap"		"0"
+			"iLookupoverride"		"0"
+			"szDemoTexturePath"		"_rt_FullFrameFB"
+			"iFallbackMode"		"0"
+		}
+		"Node_006"
+		{
+			"iType"		"17"
+			"pos_x"		"62.372070"
+			"pos_y"		"-161.438705"
+			"size_x"		"91.000000"
+			"size_y"		"-80.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"13"
+					"iTarget_jack"		"0"
+				}
+				"jackIn_01"
+				{
+					"iTarget_node"		"29"
+					"iTarget_jack"		"0"
+				}
+			}
+		}
+		"Node_007"
+		{
+			"iType"		"4"
+			"pos_x"		"737.842163"
+			"pos_y"		"-198.370224"
+			"size_x"		"55.000000"
+			"size_y"		"-17.000000"
+			"iPreview"		"0"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"8"
+					"iTarget_jack"		"0"
+				}
+			}
+			"numColors"		"1"
+			"enable_Depth"		"0"
+		}
+		"Node_008"
+		{
+			"iType"		"17"
+			"pos_x"		"480.609558"
+			"pos_y"		"-140.950394"
+			"size_x"		"91.000000"
+			"size_y"		"-80.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"3"
+					"iTarget_jack"		"0"
+				}
+				"jackIn_01"
+				{
+					"iTarget_node"		"30"
+					"iTarget_jack"		"0"
+				}
+			}
+		}
+		"Node_009"
+		{
+			"iType"		"30"
+			"pos_x"		"-211.359573"
+			"pos_y"		"-247.928986"
+			"size_x"		"50.000000"
+			"size_y"		"-30.000000"
+			"iPreview"		"0"
+			"container_extents_x"		"192.763290"
+			"container_extents_y"		"778.598938"
+			"container_extents_z"		"-192.763290"
+			"loop_condition"		"0"
+			"loop_value_min"		"0"
+			"loop_value_max"		"13"
+		}
+		"Node_010"
+		{
+			"iType"		"30"
+			"pos_x"		"-452.741760"
+			"pos_y"		"-257.029510"
+			"size_x"		"50.000000"
+			"size_y"		"-30.000000"
+			"iPreview"		"0"
+			"container_extents_x"		"233.564514"
+			"container_extents_y"		"1061.469482"
+			"container_extents_z"		"-233.564514"
+			"loop_condition"		"0"
+			"loop_value_min"		"0"
+			"loop_value_max"		"13"
+		}
+		"Node_011"
+		{
+			"iType"		"27"
+			"pos_x"		"-651.902283"
+			"pos_y"		"-381.881042"
+			"size_x"		"110.000000"
+			"size_y"		"-80.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"26"
+					"iTarget_jack"		"0"
+				}
+			}
+			"swizzleString"		"0 y"
+		}
+		"Node_012"
+		{
+			"iType"		"27"
+			"pos_x"		"-656.500183"
+			"pos_y"		"-511.098999"
+			"size_x"		"110.000000"
+			"size_y"		"-80.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"26"
+					"iTarget_jack"		"0"
+				}
+			}
+			"swizzleString"		"x 0"
+		}
+		"Node_013"
+		{
+			"iType"		"32"
+			"pos_x"		"-90.077003"
+			"pos_y"		"-140.479095"
+			"size_x"		"50.000000"
+			"size_y"		"-50.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"24"
+					"iTarget_jack"		"0"
+				}
+			}
+		}
+		"Node_014"
+		{
+			"iType"		"18"
+			"pos_x"		"-758.970703"
+			"pos_y"		"157.322723"
+			"size_x"		"91.000000"
+			"size_y"		"-80.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"24"
+					"iTarget_jack"		"0"
+				}
+				"jackIn_01"
+				{
+					"iTarget_node"		"15"
+					"iTarget_jack"		"0"
+				}
+			}
+		}
+		"Node_015"
+		{
+			"iType"		"5"
+			"pos_x"		"-874.840088"
+			"pos_y"		"205.518143"
+			"size_x"		"50.000000"
+			"size_y"		"-50.000000"
+			"iPreview"		"1"
+			"szConstantString"		"0.5"
+		}
+		"Node_016"
+		{
+			"iType"		"24"
+			"pos_x"		"-608.634216"
+			"pos_y"		"153.996582"
+			"size_x"		"93.000000"
+			"size_y"		"-80.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"14"
+					"iTarget_jack"		"0"
+				}
+			}
+		}
+		"Node_017"
+		{
+			"iType"		"34"
+			"pos_x"		"-709.693237"
+			"pos_y"		"-25.999504"
+			"size_x"		"104.000000"
+			"size_y"		"-80.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"21"
+					"iTarget_jack"		"0"
+				}
+				"jackIn_01"
+				{
+					"iTarget_node"		"20"
+					"iTarget_jack"		"0"
+				}
+				"jackIn_02"
+				{
+					"iTarget_node"		"16"
+					"iTarget_jack"		"0"
+				}
+			}
+		}
+		"Node_018"
+		{
+			"iType"		"5"
+			"pos_x"		"-680.302368"
+			"pos_y"		"-158.914703"
+			"size_x"		"50.000000"
+			"size_y"		"-50.000000"
+			"iPreview"		"1"
+			"szConstantString"		"-7"
+		}
+		"Node_019"
+		{
+			"iType"		"65"
+			"pos_x"		"-1153.126709"
+			"pos_y"		"-333.158112"
+			"size_x"		"70.000000"
+			"size_y"		"-50.000000"
+			"iPreview"		"1"
+		}
+		"Node_020"
+		{
+			"iType"		"5"
+			"pos_x"		"-812.674805"
+			"pos_y"		"-94.533463"
+			"size_x"		"50.000000"
+			"size_y"		"-50.000000"
+			"iPreview"		"1"
+			"szConstantString"		"0.6"
+		}
+		"Node_021"
+		{
+			"iType"		"5"
+			"pos_x"		"-793.005493"
+			"pos_y"		"-9.299911"
+			"size_x"		"50.000000"
+			"size_y"		"-50.000000"
+			"iPreview"		"1"
+			"szConstantString"		"0"
+		}
+		"Node_022"
+		{
+			"iType"		"5"
+			"pos_x"		"-1083.373169"
+			"pos_y"		"-441.050354"
+			"size_x"		"50.000000"
+			"size_y"		"-50.000000"
+			"iPreview"		"1"
+			"szConstantString"		"1.5"
+		}
+		"Node_023"
+		{
+			"iType"		"91"
+			"pos_x"		"131.894089"
+			"pos_y"		"-300.999878"
+			"size_x"		"79.000000"
+			"size_y"		"-50.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"9"
+					"iTarget_jack"		"0"
+				}
+				"jackIn_01"
+				{
+					"iTarget_node"		"10"
+					"iTarget_jack"		"0"
+				}
+			}
+			"i_array_size_x"		"13"
+			"i_array_size_y"		"13"
+			"i_array_datatype"		"1"
+			"pfl_arraydata_000"		"0.000013 0.000000 0.000000 0.000000"
+			"pfl_arraydata_001"		"0.000043 0.000000 0.000000 0.000000"
+			"pfl_arraydata_002"		"0.000117 0.000000 0.000000 0.000000"
+			"pfl_arraydata_003"		"0.000252 0.000000 0.000000 0.000000"
+			"pfl_arraydata_004"		"0.000436 0.000000 0.000000 0.000000"
+			"pfl_arraydata_005"		"0.000607 0.000000 0.000000 0.000000"
+			"pfl_arraydata_006"		"0.000677 0.000000 0.000000 0.000000"
+			"pfl_arraydata_007"		"0.000607 0.000000 0.000000 0.000000"
+			"pfl_arraydata_008"		"0.000436 0.000000 0.000000 0.000000"
+			"pfl_arraydata_009"		"0.000252 0.000000 0.000000 0.000000"
+			"pfl_arraydata_010"		"0.000117 0.000000 0.000000 0.000000"
+			"pfl_arraydata_011"		"0.000043 0.000000 0.000000 0.000000"
+			"pfl_arraydata_012"		"0.000013 0.000000 0.000000 0.000000"
+			"pfl_arraydata_013"		"0.000043 0.000000 0.000000 0.000000"
+			"pfl_arraydata_014"		"0.000145 0.000000 0.000000 0.000000"
+			"pfl_arraydata_015"		"0.000391 0.000000 0.000000 0.000000"
+			"pfl_arraydata_016"		"0.000843 0.000000 0.000000 0.000000"
+			"pfl_arraydata_017"		"0.001461 0.000000 0.000000 0.000000"
+			"pfl_arraydata_018"		"0.002031 0.000000 0.000000 0.000000"
+			"pfl_arraydata_019"		"0.002267 0.000000 0.000000 0.000000"
+			"pfl_arraydata_020"		"0.002031 0.000000 0.000000 0.000000"
+			"pfl_arraydata_021"		"0.001461 0.000000 0.000000 0.000000"
+			"pfl_arraydata_022"		"0.000843 0.000000 0.000000 0.000000"
+			"pfl_arraydata_023"		"0.000391 0.000000 0.000000 0.000000"
+			"pfl_arraydata_024"		"0.000145 0.000000 0.000000 0.000000"
+			"pfl_arraydata_025"		"0.000043 0.000000 0.000000 0.000000"
+			"pfl_arraydata_026"		"0.000117 0.000000 0.000000 0.000000"
+			"pfl_arraydata_027"		"0.000391 0.000000 0.000000 0.000000"
+			"pfl_arraydata_028"		"0.001051 0.000000 0.000000 0.000000"
+			"pfl_arraydata_029"		"0.002267 0.000000 0.000000 0.000000"
+			"pfl_arraydata_030"		"0.003927 0.000000 0.000000 0.000000"
+			"pfl_arraydata_031"		"0.005460 0.000000 0.000000 0.000000"
+			"pfl_arraydata_032"		"0.006094 0.000000 0.000000 0.000000"
+			"pfl_arraydata_033"		"0.005460 0.000000 0.000000 0.000000"
+			"pfl_arraydata_034"		"0.003927 0.000000 0.000000 0.000000"
+			"pfl_arraydata_035"		"0.002267 0.000000 0.000000 0.000000"
+			"pfl_arraydata_036"		"0.001051 0.000000 0.000000 0.000000"
+			"pfl_arraydata_037"		"0.000391 0.000000 0.000000 0.000000"
+			"pfl_arraydata_038"		"0.000117 0.000000 0.000000 0.000000"
+			"pfl_arraydata_039"		"0.000252 0.000000 0.000000 0.000000"
+			"pfl_arraydata_040"		"0.000843 0.000000 0.000000 0.000000"
+			"pfl_arraydata_041"		"0.002267 0.000000 0.000000 0.000000"
+			"pfl_arraydata_042"		"0.004892 0.000000 0.000000 0.000000"
+			"pfl_arraydata_043"		"0.008473 0.000000 0.000000 0.000000"
+			"pfl_arraydata_044"		"0.011780 0.000000 0.000000 0.000000"
+			"pfl_arraydata_045"		"0.013148 0.000000 0.000000 0.000000"
+			"pfl_arraydata_046"		"0.011780 0.000000 0.000000 0.000000"
+			"pfl_arraydata_047"		"0.008473 0.000000 0.000000 0.000000"
+			"pfl_arraydata_048"		"0.004892 0.000000 0.000000 0.000000"
+			"pfl_arraydata_049"		"0.002267 0.000000 0.000000 0.000000"
+			"pfl_arraydata_050"		"0.000843 0.000000 0.000000 0.000000"
+			"pfl_arraydata_051"		"0.000252 0.000000 0.000000 0.000000"
+			"pfl_arraydata_052"		"0.000436 0.000000 0.000000 0.000000"
+			"pfl_arraydata_053"		"0.001461 0.000000 0.000000 0.000000"
+			"pfl_arraydata_054"		"0.003927 0.000000 0.000000 0.000000"
+			"pfl_arraydata_055"		"0.008473 0.000000 0.000000 0.000000"
+			"pfl_arraydata_056"		"0.014675 0.000000 0.000000 0.000000"
+			"pfl_arraydata_057"		"0.020404 0.000000 0.000000 0.000000"
+			"pfl_arraydata_058"		"0.022774 0.000000 0.000000 0.000000"
+			"pfl_arraydata_059"		"0.020404 0.000000 0.000000 0.000000"
+			"pfl_arraydata_060"		"0.014675 0.000000 0.000000 0.000000"
+			"pfl_arraydata_061"		"0.008473 0.000000 0.000000 0.000000"
+			"pfl_arraydata_062"		"0.003927 0.000000 0.000000 0.000000"
+			"pfl_arraydata_063"		"0.001461 0.000000 0.000000 0.000000"
+			"pfl_arraydata_064"		"0.000436 0.000000 0.000000 0.000000"
+			"pfl_arraydata_065"		"0.000607 0.000000 0.000000 0.000000"
+			"pfl_arraydata_066"		"0.002031 0.000000 0.000000 0.000000"
+			"pfl_arraydata_067"		"0.005460 0.000000 0.000000 0.000000"
+			"pfl_arraydata_068"		"0.011780 0.000000 0.000000 0.000000"
+			"pfl_arraydata_069"		"0.020404 0.000000 0.000000 0.000000"
+			"pfl_arraydata_070"		"0.028370 0.000000 0.000000 0.000000"
+			"pfl_arraydata_071"		"0.031664 0.000000 0.000000 0.000000"
+			"pfl_arraydata_072"		"0.028370 0.000000 0.000000 0.000000"
+			"pfl_arraydata_073"		"0.020404 0.000000 0.000000 0.000000"
+			"pfl_arraydata_074"		"0.011780 0.000000 0.000000 0.000000"
+			"pfl_arraydata_075"		"0.005460 0.000000 0.000000 0.000000"
+			"pfl_arraydata_076"		"0.002031 0.000000 0.000000 0.000000"
+			"pfl_arraydata_077"		"0.000607 0.000000 0.000000 0.000000"
+			"pfl_arraydata_078"		"0.000677 0.000000 0.000000 0.000000"
+			"pfl_arraydata_079"		"0.002267 0.000000 0.000000 0.000000"
+			"pfl_arraydata_080"		"0.006094 0.000000 0.000000 0.000000"
+			"pfl_arraydata_081"		"0.013148 0.000000 0.000000 0.000000"
+			"pfl_arraydata_082"		"0.022774 0.000000 0.000000 0.000000"
+			"pfl_arraydata_083"		"0.031664 0.000000 0.000000 0.000000"
+			"pfl_arraydata_084"		"0.035341 0.000000 0.000000 0.000000"
+			"pfl_arraydata_085"		"0.031664 0.000000 0.000000 0.000000"
+			"pfl_arraydata_086"		"0.022774 0.000000 0.000000 0.000000"
+			"pfl_arraydata_087"		"0.013148 0.000000 0.000000 0.000000"
+			"pfl_arraydata_088"		"0.006094 0.000000 0.000000 0.000000"
+			"pfl_arraydata_089"		"0.002267 0.000000 0.000000 0.000000"
+			"pfl_arraydata_090"		"0.000677 0.000000 0.000000 0.000000"
+			"pfl_arraydata_091"		"0.000607 0.000000 0.000000 0.000000"
+			"pfl_arraydata_092"		"0.002031 0.000000 0.000000 0.000000"
+			"pfl_arraydata_093"		"0.005460 0.000000 0.000000 0.000000"
+			"pfl_arraydata_094"		"0.011780 0.000000 0.000000 0.000000"
+			"pfl_arraydata_095"		"0.020404 0.000000 0.000000 0.000000"
+			"pfl_arraydata_096"		"0.028370 0.000000 0.000000 0.000000"
+			"pfl_arraydata_097"		"0.031664 0.000000 0.000000 0.000000"
+			"pfl_arraydata_098"		"0.028370 0.000000 0.000000 0.000000"
+			"pfl_arraydata_099"		"0.020404 0.000000 0.000000 0.000000"
+			"pfl_arraydata_100"		"0.011780 0.000000 0.000000 0.000000"
+			"pfl_arraydata_101"		"0.005460 0.000000 0.000000 0.000000"
+			"pfl_arraydata_102"		"0.002031 0.000000 0.000000 0.000000"
+			"pfl_arraydata_103"		"0.000607 0.000000 0.000000 0.000000"
+			"pfl_arraydata_104"		"0.000436 0.000000 0.000000 0.000000"
+			"pfl_arraydata_105"		"0.001461 0.000000 0.000000 0.000000"
+			"pfl_arraydata_106"		"0.003927 0.000000 0.000000 0.000000"
+			"pfl_arraydata_107"		"0.008473 0.000000 0.000000 0.000000"
+			"pfl_arraydata_108"		"0.014675 0.000000 0.000000 0.000000"
+			"pfl_arraydata_109"		"0.020404 0.000000 0.000000 0.000000"
+			"pfl_arraydata_110"		"0.022774 0.000000 0.000000 0.000000"
+			"pfl_arraydata_111"		"0.020404 0.000000 0.000000 0.000000"
+			"pfl_arraydata_112"		"0.014675 0.000000 0.000000 0.000000"
+			"pfl_arraydata_113"		"0.008473 0.000000 0.000000 0.000000"
+			"pfl_arraydata_114"		"0.003927 0.000000 0.000000 0.000000"
+			"pfl_arraydata_115"		"0.001461 0.000000 0.000000 0.000000"
+			"pfl_arraydata_116"		"0.000436 0.000000 0.000000 0.000000"
+			"pfl_arraydata_117"		"0.000252 0.000000 0.000000 0.000000"
+			"pfl_arraydata_118"		"0.000843 0.000000 0.000000 0.000000"
+			"pfl_arraydata_119"		"0.002267 0.000000 0.000000 0.000000"
+			"pfl_arraydata_120"		"0.004892 0.000000 0.000000 0.000000"
+			"pfl_arraydata_121"		"0.008473 0.000000 0.000000 0.000000"
+			"pfl_arraydata_122"		"0.011780 0.000000 0.000000 0.000000"
+			"pfl_arraydata_123"		"0.013148 0.000000 0.000000 0.000000"
+			"pfl_arraydata_124"		"0.011780 0.000000 0.000000 0.000000"
+			"pfl_arraydata_125"		"0.008473 0.000000 0.000000 0.000000"
+			"pfl_arraydata_126"		"0.004892 0.000000 0.000000 0.000000"
+			"pfl_arraydata_127"		"0.002267 0.000000 0.000000 0.000000"
+			"pfl_arraydata_128"		"0.000843 0.000000 0.000000 0.000000"
+			"pfl_arraydata_129"		"0.000252 0.000000 0.000000 0.000000"
+			"pfl_arraydata_130"		"0.000117 0.000000 0.000000 0.000000"
+			"pfl_arraydata_131"		"0.000391 0.000000 0.000000 0.000000"
+			"pfl_arraydata_132"		"0.001051 0.000000 0.000000 0.000000"
+			"pfl_arraydata_133"		"0.002267 0.000000 0.000000 0.000000"
+			"pfl_arraydata_134"		"0.003927 0.000000 0.000000 0.000000"
+			"pfl_arraydata_135"		"0.005460 0.000000 0.000000 0.000000"
+			"pfl_arraydata_136"		"0.006094 0.000000 0.000000 0.000000"
+			"pfl_arraydata_137"		"0.005460 0.000000 0.000000 0.000000"
+			"pfl_arraydata_138"		"0.003927 0.000000 0.000000 0.000000"
+			"pfl_arraydata_139"		"0.002267 0.000000 0.000000 0.000000"
+			"pfl_arraydata_140"		"0.001051 0.000000 0.000000 0.000000"
+			"pfl_arraydata_141"		"0.000391 0.000000 0.000000 0.000000"
+			"pfl_arraydata_142"		"0.000117 0.000000 0.000000 0.000000"
+			"pfl_arraydata_143"		"0.000043 0.000000 0.000000 0.000000"
+			"pfl_arraydata_144"		"0.000145 0.000000 0.000000 0.000000"
+			"pfl_arraydata_145"		"0.000391 0.000000 0.000000 0.000000"
+			"pfl_arraydata_146"		"0.000843 0.000000 0.000000 0.000000"
+			"pfl_arraydata_147"		"0.001461 0.000000 0.000000 0.000000"
+			"pfl_arraydata_148"		"0.002031 0.000000 0.000000 0.000000"
+			"pfl_arraydata_149"		"0.002267 0.000000 0.000000 0.000000"
+			"pfl_arraydata_150"		"0.002031 0.000000 0.000000 0.000000"
+			"pfl_arraydata_151"		"0.001461 0.000000 0.000000 0.000000"
+			"pfl_arraydata_152"		"0.000843 0.000000 0.000000 0.000000"
+			"pfl_arraydata_153"		"0.000391 0.000000 0.000000 0.000000"
+			"pfl_arraydata_154"		"0.000145 0.000000 0.000000 0.000000"
+			"pfl_arraydata_155"		"0.000043 0.000000 0.000000 0.000000"
+			"pfl_arraydata_156"		"0.000013 0.000000 0.000000 0.000000"
+			"pfl_arraydata_157"		"0.000043 0.000000 0.000000 0.000000"
+			"pfl_arraydata_158"		"0.000117 0.000000 0.000000 0.000000"
+			"pfl_arraydata_159"		"0.000252 0.000000 0.000000 0.000000"
+			"pfl_arraydata_160"		"0.000436 0.000000 0.000000 0.000000"
+			"pfl_arraydata_161"		"0.000607 0.000000 0.000000 0.000000"
+			"pfl_arraydata_162"		"0.000677 0.000000 0.000000 0.000000"
+			"pfl_arraydata_163"		"0.000607 0.000000 0.000000 0.000000"
+			"pfl_arraydata_164"		"0.000436 0.000000 0.000000 0.000000"
+			"pfl_arraydata_165"		"0.000252 0.000000 0.000000 0.000000"
+			"pfl_arraydata_166"		"0.000117 0.000000 0.000000 0.000000"
+			"pfl_arraydata_167"		"0.000043 0.000000 0.000000 0.000000"
+			"pfl_arraydata_168"		"0.000013 0.000000 0.000000 0.000000"
+		}
+		"Node_024"
+		{
+			"iType"		"3"
+			"pos_x"		"-1009.154297"
+			"pos_y"		"-160.939713"
+			"size_x"		"55.000000"
+			"size_y"		"-17.000000"
+			"iPreview"		"0"
+			"numTexcoords"		"1"
+			"numColor"		"0"
+			"numTexcoord_Flag_0"		"2"
+			"numTexcoord_Flag_1"		"2"
+			"numTexcoord_Flag_2"		"2"
+			"numTexcoord_Flag_3"		"2"
+			"numTexcoord_Flag_4"		"2"
+			"numTexcoord_Flag_5"		"2"
+			"numTexcoord_Flag_6"		"2"
+			"numTexcoord_Flag_7"		"2"
+			"numColor_Flag_0"		"8"
+			"numColor_Flag_1"		"8"
+		}
+		"Node_025"
+		{
+			"iType"		"19"
+			"szName"		"kernelsize"
+			"pos_x"		"-1002.916565"
+			"pos_y"		"-329.959045"
+			"size_x"		"91.000000"
+			"size_y"		"-80.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"19"
+					"iTarget_jack"		"0"
+				}
+				"jackIn_01"
+				{
+					"iTarget_node"		"22"
+					"iTarget_jack"		"0"
+				}
+			}
+			"i_mat_rotation"		"0"
+		}
+		"Node_026"
+		{
+			"iType"		"19"
+			"szName"		"scale by dist"
+			"pos_x"		"-823.706787"
+			"pos_y"		"-333.351807"
+			"size_x"		"91.000000"
+			"size_y"		"-80.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"25"
+					"iTarget_jack"		"0"
+				}
+				"jackIn_01"
+				{
+					"iTarget_node"		"17"
+					"iTarget_jack"		"0"
+				}
+			}
+			"i_mat_rotation"		"0"
+		}
+		"Node_027"
+		{
+			"iType"		"19"
+			"szName"		"get base offset"
+			"pos_x"		"-574.143982"
+			"pos_y"		"-224.421844"
+			"size_x"		"91.000000"
+			"size_y"		"-80.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"26"
+					"iTarget_jack"		"0"
+				}
+				"jackIn_01"
+				{
+					"iTarget_node"		"18"
+					"iTarget_jack"		"0"
+				}
+			}
+			"i_mat_rotation"		"0"
+		}
+		"Node_028"
+		{
+			"iType"		"17"
+			"szName"		"advance Y"
+			"pos_x"		"-335.467072"
+			"pos_y"		"-173.400482"
+			"size_x"		"91.000000"
+			"size_y"		"-80.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"27"
+					"iTarget_jack"		"0"
+				}
+				"jackIn_01"
+				{
+					"iTarget_node"		"11"
+					"iTarget_jack"		"0"
+				}
+			}
+		}
+		"Node_029"
+		{
+			"iType"		"17"
+			"szName"		"advance X"
+			"pos_x"		"-71.365067"
+			"pos_y"		"-280.682953"
+			"size_x"		"91.000000"
+			"size_y"		"-80.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"31"
+					"iTarget_jack"		"0"
+				}
+				"jackIn_01"
+				{
+					"iTarget_node"		"12"
+					"iTarget_jack"		"0"
+				}
+			}
+		}
+		"Node_030"
+		{
+			"iType"		"19"
+			"szName"		"gaussian weighting"
+			"pos_x"		"350.470886"
+			"pos_y"		"-247.962463"
+			"size_x"		"91.000000"
+			"size_y"		"-80.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"5"
+					"iTarget_jack"		"0"
+				}
+				"jackIn_01"
+				{
+					"iTarget_node"		"23"
+					"iTarget_jack"		"0"
+				}
+			}
+			"i_mat_rotation"		"0"
+		}
+		"Node_031"
+		{
+			"iType"		"32"
+			"pos_x"		"-316.047546"
+			"pos_y"		"-381.111755"
+			"size_x"		"50.000000"
+			"size_y"		"-50.000000"
+			"iPreview"		"1"
+			"bridges"
+			{
+				"jackIn_00"
+				{
+					"iTarget_node"		"28"
+					"iTarget_jack"		"0"
+				}
+			}
+		}
+	}
+	"config"
+	{
+		"shadermodel"		"1"
+		"cull_mode"		"0"
+		"alpha_blending"		"0"
+		"depth_test"		"0"
+		"depth_write"		"0"
+		"srgb_write"		"0"
+	}
+}

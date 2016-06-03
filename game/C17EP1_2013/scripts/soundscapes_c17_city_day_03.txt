@@ -1,0 +1,82 @@
+// Soundscapes for c17ep1 03
+"c17ep1.garage.main"
+{
+	"dsp" "1"
+//Outside sounds
+		"playlooping"
+	{
+		"volume"	"0.15"
+		"position"	"1"
+		"soundlevel"	"SNDLVL_140dB"
+		"wave"		"ambient\water\water_drips_water.wav"
+	}
+	"playrandom"
+	{
+		"time"		"12, 15"
+		"volume"	"0.1, 0.3"
+		"pitch"		"90,105"
+		"soundlevel"	"SNDLVL_140dB"
+		"position" 	"random"
+		"rndwave"
+		{
+			"wave"	"ambient/levels/city/citadel_cloudhit1.wav"
+			"wave"	"ambient/levels/city/citadel_cloudhit2.wav"
+			"wave"	"ambient/levels/intro/Rhumble_1_42_07.wav"
+		}
+	}
+//Inside wind Gusts
+
+	//Inside wind Gusts
+	"playrandom"
+	{
+		"time"		"2, 16"
+		"volume"	"0.25, 0.35"
+				"pitch"		"50,105"
+		"soundlevel"	"SNDLVL_140dB"
+		"position" 	"1"
+		"rndwave"
+		{
+			"wave"	"ambient\Wind\wind_leaves_mild_gust_1.wav"
+			"wave"	"ambient\Wind\treewind3.wav"
+			"wave"	"ambient\Wind\wind_med1.wav"
+		}
+	}
+//tone sounds
+		"playlooping"
+	{
+		"volume"	"0.12"
+		"position"	"1"
+		"soundlevel"	"SNDLVL_140dB"
+		"wave"		"ambient\water\crucial_smallroomtone_amb_loop.wav"
+	}
+
+//fear and gasps
+"playrandom"
+	{
+		"time"		"30, 180"
+		"volume"	"0.3,0.5"
+		"pitch"		"80,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_140db"
+		"rndwave"
+		{
+			"wave"	"ambient/creatures/town_scared_sob1.wav"
+			"wave"	"ambient/creatures/town_scared_breathing1.wav"
+			"wave"	"ambient/creatures/town_scared_breathing2.wav"
+		}	
+	}
+	"playrandom"
+	{
+		"time"		"30, 60"
+		"volume"	"0.1,0.15"
+		"pitch"		"80,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_140db"
+		"rndwave"
+		{
+			"wave"	"ambient/debris/junk_debris_04.wav"
+			"wave"	"ambient/debris/junk_debris_03.wav"
+			"wave"	"ambient/debris/junk_debris_02.wav"
+		}	
+	}
+}

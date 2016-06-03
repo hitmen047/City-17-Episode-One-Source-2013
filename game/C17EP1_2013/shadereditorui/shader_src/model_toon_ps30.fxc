@@ -1,0 +1,121 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Combos
+// STATIC: "FLASHLIGHT"		"0..1"
+// DYNAMIC: "PIXELFOGTYPE"		"0..1"
+// DYNAMIC: "NUM_LIGHTS"		"0..4"
+// DYNAMIC: "WRITEWATERFOGTODESTALPHA"		"0..1"
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+sampler _Sampler_01		: register( s1 );
+
+// Constants
+const float2 g_cData_rim_boost_exp		: register( c16 ); 		// Static
+const float3 g_cData_rim_color		: register( c17 ); 		// Static
+const float4 _g_FogParams		: register( c18 );
+const float3 _g_VecOrig		: register( c19 );
+const float3 g_cAmbientCube[6]		: register( c0 );
+PixelShaderLightInfo g_cLightInfo[3]		: register( c6 );
+
+// Arrays
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+	float3 vTexCoord_1			:	TEXCOORD1;
+	float3 vTexCoord_2			:	TEXCOORD2;
+	float4 vTexCoord_3			:	TEXCOORD3;
+	float4 vTexCoord_4			:	TEXCOORD4;
+	float3 vTexCoord_5			:	TEXCOORD5;
+	float3 vTexCoord_6			:	TEXCOORD6;
+	float3 vTexCoord_7			:	TEXCOORD7;
+	float4 vColor_0				:	COLOR0;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float3 _var0 = float3( 0.000000, 0.000000, 0.000000 );
+	float3 _var1 = tex2D( _Sampler_00, In.vTexCoord_0 ).rgb;
+	float3x3 _var2 = { In.vTexCoord_5,
+				In.vTexCoord_6,
+				In.vTexCoord_1 };
+	float4 _texLookup_32 = tex2D( _Sampler_01, In.vTexCoord_0 );
+	float3 _var3 = _texLookup_32.rgb;
+	float _var4 = _texLookup_32.a;
+	float3 _var5 = float3( 0.050000, 0.050000, 0.050000 );
+	float3 _var6 = normalize( In.vTexCoord_7 );
+	float _var7 = g_cData_rim_boost_exp.y;
+	float _var8 = g_cData_rim_boost_exp.x;
+	float _var9 = _g_VecOrig.z;
+	float _var10 = In.vTexCoord_2.z;
+	float _var11 = In.vTexCoord_4.z;
+#if ( FLASHLIGHT == 0 )
+		_var0 = float3( 1.000000, 1.000000, 1.000000 );
+#endif
+#if ( FLASHLIGHT == 1 )
+		float3 _var12 = In.vColor_0.xyz;
+		_var12 = normalize( _var12 );
+		_var0 = _var12;
+#endif
+	_var0 = _var0;
+	_var1 = _var1 * float( 2.000000 );
+	_var6 = _var6 * float( -1.000000 );
+	_var9 = CalcPixelFogFactor( PIXELFOGTYPE, _g_FogParams, _var9, _var10, _var11 );
+	_var1 = _var1 - float( 1.000000 );
+	_var1 = normalize( _var1 );
+	_var1 = mul( _var1, _var2 );
+	_var1 = normalize( _var1 );
+	float _var13 = dot( _var0, _var1 );
+	float3 _var14 = PixelShaderDoLighting( In.vTexCoord_2, _var1, float3(0,0,0),
+			false, true, In.vTexCoord_3,
+			g_cAmbientCube, NUM_LIGHTS, g_cLightInfo,
+			false, false, 1.0f );
+	float _var15 = dot( _var1, _var6 );
+	_var13 = clamp( _var13, float( 0.000000 ), float( 1.000000 ) );
+	_var15 = abs( _var15 );
+	if ( _var13 > float( 0.000000 ) )
+	{
+		_var5 = _var5 + float3( 0.100000, 0.100000, 0.100000 );
+		if ( _var13 > float( 0.050000 ) )
+		{
+			_var5 = _var5 + float3( 0.250000, 0.250000, 0.250000 );
+			if ( _var13 > float( 0.500000 ) )
+			{
+				_var5 = _var5 + float3( 0.350000, 0.350000, 0.350000 );
+				if ( _var13 > float( 0.950000 ) )
+				{
+					_var5 = _var5 + float3( 0.250000, 0.250000, 0.250000 );
+				}
+			}
+		}
+	}
+	_var15 = 1.0f - _var15;
+	_var15 = pow( _var15, _var7 );
+	float3 _var16 = _var15 * g_cData_rim_color;
+	_var16 = _var16 * _var8;
+	_var5 = _var5 + _var16;
+	_var3 = _var3 * _var5;
+	float4 _var17 = float4( _var3, _var4 );
+	_var17 = FinalOutput( _var17, _var9, PIXELFOGTYPE, TONEMAP_SCALE_LINEAR, true, _var11 );
+	Out.vColor_0 = _var17;
+	return Out;
+}

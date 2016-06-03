@@ -1,0 +1,47 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float _var0 = tex2D( _Sampler_00, In.vTexCoord_0 ).a;
+	float4 _texLookup_6 = tex2D( _Sampler_00, In.vTexCoord_0 );
+	float4 _var1 = _texLookup_6.rgba;
+	float3 _var2 = _texLookup_6.rgb;
+	_var0 = float( 0.000250 ) * _var0;
+	float3 _var3 = _var1.yzw;
+	float _var4 = dot( _var2, float3( 0.400000, 0.400000, 0.500000 ) );
+	float2 _var5 = In.vTexCoord_0 - _var0;
+	float3 _var6 = lerp( _var2, _var4, float( 0.200000 ) );
+	float _var7 = tex2D( _Sampler_00, _var5 ).r;
+	float4 _var8 = float4( _var6, float( 1.000000 ) );
+	float4 _var9 = float4( _var7, _var3 );
+	_var9 = max( _var9, _var8 );
+	Out.vColor_0 = _var9;
+	return Out;
+}

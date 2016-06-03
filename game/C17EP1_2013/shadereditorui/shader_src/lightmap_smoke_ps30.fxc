@@ -1,0 +1,195 @@
+// ********************************
+// ** auto generated pixelshader **
+// ********************************
+
+// Includes
+#include "common_ps_fxc.h"
+#include "common_vertexlitgeneric_dx9.h"
+#include "common_lightmappedgeneric_fxc.h"
+#include "common_flashlight_fxc.h"
+#include "common_parallax.h"
+
+
+// Combos
+// DYNAMIC: "FLASHLIGHT"		"0..1"
+// DYNAMIC: "FLASHLIGHTDEPTHFILTERMODE"		"0..2"
+// DYNAMIC: "FLASHLIGHTSHADOWS"		"0..1"
+// DYNAMIC: "PIXELFOGTYPE"		"0..1"
+// DYNAMIC: "WRITEWATERFOGTODESTALPHA"		"0..1"
+
+// Samplers
+sampler _Sampler_00		: register( s0 );
+sampler _Sampler_01		: register( s1 );
+sampler _Sampler_02		: register( s2 );
+sampler _gSampler_Flashlight_Cookie		: register( s3 );
+sampler _gSampler_Flashlight_Depth		: register( s4 );
+sampler _gSampler_Flashlight_Random		: register( s5 );
+sampler _Sampler_06		: register( s6 );
+sampler _Sampler_07		: register( s7 );
+sampler _Sampler_08		: register( s8 );
+sampler _Sampler_09		: register( s9 );
+sampler _Sampler_10		: register( s10 );
+sampler _Sampler_11		: register( s11 );
+
+// Constants
+const float4x4 g_cFlashlightWorldToTexture		: register( c12 );
+const float _g_Time		: register( c16 );
+const float2 g_cData_warp_directions1		: register( c17 ); 		// Static
+const float g_cData_warp_strength1		: register( c18 ); 		// Static
+const float2 g_cData_warp_directions2		: register( c19 ); 		// Static
+const float g_cData_warp_strength2		: register( c20 ); 		// Static
+const float g_cData_smokemask_topstrength		: register( c21 ); 		// Static
+const float2 g_cData_warp_amount		: register( c22 ); 		// Static
+const float2 g_cData_smokemask1_scale		: register( c23 ); 		// Static
+const float2 g_cData_smokemask1_scrollrate		: register( c24 ); 		// Static
+const float2 g_cData_smokemask2_scale		: register( c25 ); 		// Static
+const float2 g_cData_smokemask2_scrollrate		: register( c26 ); 		// Static
+const float g_cData_smokemask_subtractamount		: register( c27 ); 		// Static
+const float g_cData_smokemask_bottomstrength		: register( c28 ); 		// Static
+const float4 g_cFlashlightAttenuationFactors		: register( c8 );
+const float4 g_cFlashlightPos		: register( c9 );
+const float4 g_cShadowTweaks		: register( c7 );
+
+// Arrays
+
+// Semantic structures
+struct PS_INPUT
+{
+	float2 vTexCoord_0			:	TEXCOORD0;
+	float2 vTexCoord_1			:	TEXCOORD1;
+	float4 vTexCoord_2			:	TEXCOORD2;
+	float3 vTexCoord_3			:	TEXCOORD3;
+	float3 vTexCoord_4			:	TEXCOORD4;
+};
+
+struct PS_OUTPUT
+{
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+PS_OUTPUT main( const PS_INPUT In )
+{
+	PS_OUTPUT Out;
+	float3 _var0 = float3( 0.000000, 0.000000, 0.000000 );
+	float2 _var1 = _g_Time * g_cData_warp_directions1;
+	float2 _var2 = _g_Time * g_cData_warp_directions2;
+	float3 _var3 = tex2D( _Sampler_00, In.vTexCoord_0 ).rgb;
+	float2 _var4 = g_cData_smokemask1_scrollrate / float( 10.000000 );
+	float2 _var5 = g_cData_smokemask2_scrollrate / float( 10.000000 );
+	float3 _var6 = tex2D( _Sampler_01, In.vTexCoord_0 ).rgb;
+#if ( FLASHLIGHT == 0 )
+		float3 _var7 = tex2D( _Sampler_02, In.vTexCoord_1 ).rgb;
+		_var7 = _var7 * LIGHT_MAP_SCALE;
+		_var0 = _var7;
+#endif
+#if ( FLASHLIGHT == 1 )
+		float4 _var8 = mul( float4(In.vTexCoord_3.xyz,1), g_cFlashlightWorldToTexture );
+		float2 _var9 = In.vTexCoord_2.xy;
+		float _var10 = In.vTexCoord_2.w;
+		_var9 = _var9 / _var10;
+		_var9 = _var9 * float( 0.500000 );
+		_var9 = _var9 + float( 0.500000 );
+		float3 _var11 = DoFlashlight( g_cFlashlightPos.xyz, In.vTexCoord_3, _var8, In.vTexCoord_4,
+				g_cFlashlightAttenuationFactors.xyz, g_cFlashlightAttenuationFactors.w,
+				_gSampler_Flashlight_Cookie, _gSampler_Flashlight_Depth, _gSampler_Flashlight_Random,
+				FLASHLIGHTDEPTHFILTERMODE, FLASHLIGHTSHADOWS, true,
+				_var9, false, g_cShadowTweaks );
+		_var0 = _var11;
+#endif
+	_var0 = _var0;
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float rot_def = float( 0.0f );
+		float2 scale_def = float2( 1.0f, 1.0f );
+		float fs = sin( rot_def );
+		float fc = cos( rot_def );
+		float4 row_0 = float4( fc * scale_def.x, -fs * scale_def.x, 0, ( -center_def.x * fc + center_def.y * fs ) * scale_def.x + center_def.x + _var1.x );
+		float4 row_1 = float4( fs * scale_def.y, fc * scale_def.y, 0, ( -center_def.x * fs - center_def.y * fc ) * scale_def.y + center_def.y + _var1.y );
+		_var1.x = dot( float4( In.vTexCoord_0, 0, 1 ), row_0 );
+		_var1.y = dot( float4( In.vTexCoord_0, 0, 1 ), row_1 );
+	}
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float rot_def = float( 0.0f );
+		float2 scale_def = float2( 1.0f, 1.0f );
+		float fs = sin( rot_def );
+		float fc = cos( rot_def );
+		float4 row_0 = float4( fc * scale_def.x, -fs * scale_def.x, 0, ( -center_def.x * fc + center_def.y * fs ) * scale_def.x + center_def.x + _var2.x );
+		float4 row_1 = float4( fs * scale_def.y, fc * scale_def.y, 0, ( -center_def.x * fs - center_def.y * fc ) * scale_def.y + center_def.y + _var2.y );
+		_var2.x = dot( float4( In.vTexCoord_0, 0, 1 ), row_0 );
+		_var2.y = dot( float4( In.vTexCoord_0, 0, 1 ), row_1 );
+	}
+	_var4 = _g_Time * _var4;
+	_var5 = _g_Time * _var5;
+	float _var12 = tex2D( _Sampler_06, _var1 ).g;
+	float _var13 = tex2D( _Sampler_07, _var2 ).g;
+	_var12 = _var12 * g_cData_warp_strength1;
+	_var13 = _var13 * g_cData_warp_strength2;
+	_var12 = lerp( _var12, _var13, float( 0.500000 ) );
+	float _var14 = float( 5.000000 ) * _var12;
+	float _var15 = float( 1.400000 ) * _var12;
+	float2 _var16 = float2( 0.500000, 1.000000 ) * _var14;
+	float2 _var17 = g_cData_warp_amount * _var15;
+	_var16 = _var16 * float( 0.012000 );
+	_var17 = _var17 * float( 0.012000 );
+	_var16 = In.vTexCoord_0 + _var16;
+	float2 _var18 = In.vTexCoord_0 + _var17;
+	float2 _var19 = In.vTexCoord_0 + _var17;
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float rot_def = float( 0.0f );
+		float2 scale_def = float2( 1.0f, 1.0f );
+		float2 trans_def = float2( 0.0f, 0.0f );
+		float fs = sin( rot_def );
+		float fc = cos( rot_def );
+		float4 row_0 = float4( fc * scale_def.x, -fs * scale_def.x, 0, ( -center_def.x * fc + center_def.y * fs ) * scale_def.x + center_def.x + trans_def.x );
+		float4 row_1 = float4( fs * scale_def.y, fc * scale_def.y, 0, ( -center_def.x * fs - center_def.y * fc ) * scale_def.y + center_def.y + trans_def.y );
+		_var16.x = dot( float4( _var16, 0, 1 ), row_0 );
+		_var16.y = dot( float4( _var16, 0, 1 ), row_1 );
+	}
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float rot_def = float( 0.0f );
+		float fs = sin( rot_def );
+		float fc = cos( rot_def );
+		float4 row_0 = float4( fc * g_cData_smokemask1_scale.x, -fs * g_cData_smokemask1_scale.x, 0, ( -center_def.x * fc + center_def.y * fs ) * g_cData_smokemask1_scale.x + center_def.x + _var4.x );
+		float4 row_1 = float4( fs * g_cData_smokemask1_scale.y, fc * g_cData_smokemask1_scale.y, 0, ( -center_def.x * fs - center_def.y * fc ) * g_cData_smokemask1_scale.y + center_def.y + _var4.y );
+		_var18.x = dot( float4( _var18, 0, 1 ), row_0 );
+		_var18.y = dot( float4( _var18, 0, 1 ), row_1 );
+	}
+	{
+		float2 center_def = float2( 0.5f, 0.5f );
+		float rot_def = float( 0.0f );
+		float fs = sin( rot_def );
+		float fc = cos( rot_def );
+		float4 row_0 = float4( fc * g_cData_smokemask2_scale.x, -fs * g_cData_smokemask2_scale.x, 0, ( -center_def.x * fc + center_def.y * fs ) * g_cData_smokemask2_scale.x + center_def.x + _var5.x );
+		float4 row_1 = float4( fs * g_cData_smokemask2_scale.y, fc * g_cData_smokemask2_scale.y, 0, ( -center_def.x * fs - center_def.y * fc ) * g_cData_smokemask2_scale.y + center_def.y + _var5.y );
+		_var19.x = dot( float4( _var19, 0, 1 ), row_0 );
+		_var19.y = dot( float4( _var19, 0, 1 ), row_1 );
+	}
+	float _var20 = tex2D( _Sampler_08, _var16 ).a;
+	float _var21 = tex2D( _Sampler_09, _var18 ).g;
+	float _var22 = tex2D( _Sampler_10, _var16 ).a;
+	float _var23 = tex2D( _Sampler_11, _var19 ).g;
+	float _var24 = _var20 * g_cData_smokemask_topstrength;
+	_var3 = _var3 * _var21;
+	float _var25 = _var23 * g_cData_smokemask_subtractamount;
+	float _var26 = _var23 * float( 0.250000 );
+	float _var27 = _var20 + _var22;
+	_var3 = _var24 * _var3;
+	_var25 = _var22 * _var25;
+	_var6 = _var6 * _var26;
+	_var27 = _var27 * _var21;
+	_var3 = _var3 * float( 1.000000 );
+	_var25 = _var25 * g_cData_smokemask_bottomstrength;
+	_var6 = _var25 * _var6;
+	_var6 = _var6 * float( 1.000000 );
+	_var3 = _var3 + _var6;
+	_var0 = _var0 * _var3;
+	float4 _var28 = float4( _var0, float( 1.000000 ) );
+	_var28 = _var28 * _var27;
+	_var28 = FinalOutput( _var28, float( 0.000000 ), PIXELFOGTYPE, TONEMAP_SCALE_LINEAR, false, 1.0f );
+	Out.vColor_0 = _var28;
+	return Out;
+}

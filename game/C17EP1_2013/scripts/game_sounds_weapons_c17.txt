@@ -1,0 +1,134 @@
+"Weapon_SMG1.Draw"
+{
+	"channel"	"CHAN_FIRST"
+	"volume"		"1.0"
+	"soundlevel"		"SNDLVL_NORM"
+
+	"wave"	"weapons/draw_smg.wav"
+}
+
+"Weapon_SMG1.Release"
+{
+	"channel"	"CHAN_FIRST"
+	"volume"		"1.0"
+	"soundlevel"		"SNDLVL_NORM"
+
+	"wave"	"weapons/hand_move1.wav"
+}
+
+"Weapon_Pistol.Draw"
+{
+	"channel"	"CHAN_FIRST"
+	"volume"		"1.0"
+	"soundlevel"		"SNDLVL_NORM"
+
+	"wave"	"weapons/draw_pistol.wav"
+}
+
+"Weapon_Crowbar.Draw"
+{
+	"channel"	"CHAN_FIRST"
+	"volume"		"1.0"
+	"soundlevel"		"SNDLVL_NORM"
+
+	"wave"	"weapons/draw_crowbar.wav"
+}
+
+"Weapon_Grenade.Draw"
+{
+	"channel"	"CHAN_FIRST"
+	"volume"		"1.0"
+	"soundlevel"		"SNDLVL_NORM"
+
+	"wave"	"weapons/draw_grenade.wav"
+}
+
+"Weapon_Grenade.Pull"
+{
+	"channel"	"CHAN_FIRST"
+	"volume"		"1.0"
+	"soundlevel"		"SNDLVL_NORM"
+
+	"wave"	"weapons/draw_grenade_pinpull.wav"
+}
+
+"Weapon_Physcannon.Draw"
+{
+	"channel"	"CHAN_FIRST"
+	"volume"		"1.0"
+	"soundlevel"		"SNDLVL_NORM"
+
+	"wave"	"weapons/draw_physcannon.wav"
+}
+
+"Weapon_Bugbait.Draw"
+{
+	"channel"	"CHAN_FIRST"
+	"volume"		"1.0"
+	"soundlevel"		"SNDLVL_NORM"
+
+	"wave"	"weapons/draw_bugbait.wav"
+}
+
+"Weapon_Shotgun.Draw"
+{
+	"channel"	"CHAN_FIRST"
+	"volume"		"1.0"
+	"soundlevel"		"SNDLVL_NORM"
+
+	"wave"	"weapons/draw_shotgun.wav"
+}
+
+"Weapon_Irifle.Draw"
+{
+	"channel"	"CHAN_FIRST"
+	"volume"		"1.0"
+	"soundlevel"		"SNDLVL_NORM"
+
+	"wave"	"weapons/draw_irifle.wav"
+}
+
+"Weapon_RPG.Draw"
+{
+	"channel"	"CHAN_FIRST"
+	"volume"		"1.0"
+	"soundlevel"		"SNDLVL_NORM"
+
+	"wave"	"weapons/draw_rpg.wav"
+}
+
+"Weapon_Crowbar.Draw"
+{
+	"channel"	"CHAN_FIRST"
+	"volume"		"1.0"
+	"soundlevel"		"SNDLVL_NORM"
+
+	"wave"	"weapons/draw_crowbar.wav"
+}
+
+"Weapon_Crossbow.Draw"
+{
+	"channel"	"CHAN_FIRST"
+	"volume"		"1.0"
+	"soundlevel"		"SNDLVL_NORM"
+
+	"wave"	"weapons/draw_crossbow.wav"
+}
+
+"Weapon_357.Draw"
+{
+	"channel"	"CHAN_FIRST"
+	"volume"		"1.0"
+	"soundlevel"		"SNDLVL_NORM"
+
+	"wave"	"weapons/draw_357.wav"
+}
+
+"Weapon.Hand_Movement"
+{
+	"channel"	"CHAN_FIRST"
+	"volume"		"1.0"
+	"soundlevel"		"SNDLVL_NORM"
+
+	"wave"	"weapons/hand_move1.wav"
+}

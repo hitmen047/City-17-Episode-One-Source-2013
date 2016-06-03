@@ -1,0 +1,203 @@
+"lightmap_refract_adv"
+{
+	"vs_name"		"lightmap_refract_adv_vs30"
+	"ps_name"		"lightmap_refract_adv_ps30"
+	"shader_filename"		"shadereditorui\canvas\lightmap_refract_adv.txt"
+	"dump_version"		"dumpver#001"
+	"i_sm"		"1"
+	"i_cull"		"0"
+	"i_ablend"		"1"
+	"fl_atestref"		"0.500000"
+	"i_dtest"		"1"
+	"i_dwrite"		"0"
+	"i_srgbw"		"0"
+	"i_vfmt_flags"		"334211"
+	"i_vfmt_texcoords"		"1"
+	"i_vfmt_udata"		"4"
+	"i_vfmt_texcoordDim_0"		"2"
+	"i_vfmt_texcoordDim_1"		"2"
+	"i_vfmt_texcoordDim_2"		"2"
+	"i_vlit"		"0"
+	"i_vrefract"		"1"
+	"identifiers_VS"
+	{
+		"combo_0"
+		{
+			"sz_name"		"SKINNING"
+			"i_static"		"0"
+			"i_min"		"0"
+			"i_max"		"1"
+			"i_type"		"2"
+		}
+		"econst_0"
+		{
+			"i_envconstidx"		"1"
+			"i_normregister"		"0"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"1"
+			"fl_smartdefault_00"		"0.000000"
+			"fl_smartdefault_01"		"0.000000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"i_numdcombos"		"2"
+	}
+	"identifiers_PS"
+	{
+		"econst_0"
+		{
+			"i_envconstidx"		"0"
+			"i_normregister"		"0"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"1"
+			"fl_smartdefault_00"		"0.000000"
+			"fl_smartdefault_01"		"0.000000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_1"
+		{
+			"i_envconstidx"		"15"
+			"i_normregister"		"1"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"1"
+			"sz_smartname"		"refraction_flowmapscrollrate"
+			"fl_smartdefault_00"		"0.000000"
+			"fl_smartdefault_01"		"0.000000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_2"
+		{
+			"i_envconstidx"		"15"
+			"i_normregister"		"2"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"0"
+			"sz_smartname"		"refraction_distortpower"
+			"fl_smartdefault_00"		"0.300000"
+			"fl_smartdefault_01"		"0.000000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_3"
+		{
+			"i_envconstidx"		"15"
+			"i_normregister"		"3"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"1"
+			"sz_smartname"		"refraction_scroll"
+			"fl_smartdefault_00"		"0.000000"
+			"fl_smartdefault_01"		"0.050000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_4"
+		{
+			"i_envconstidx"		"15"
+			"i_normregister"		"4"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"1"
+			"sz_smartname"		"refraction_distort_direction"
+			"fl_smartdefault_00"		"0.000000"
+			"fl_smartdefault_01"		"0.100000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_5"
+		{
+			"i_envconstidx"		"15"
+			"i_normregister"		"5"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"0"
+			"sz_smartname"		"refraction_variationblendamount"
+			"fl_smartdefault_00"		"0.400000"
+			"fl_smartdefault_01"		"0.000000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_6"
+		{
+			"i_envconstidx"		"13"
+			"i_normregister"		"6"
+			"i_econstsize"		"4"
+			"i_smartcomps"		"2"
+			"fl_smartdefault_00"		"0.000000"
+			"fl_smartdefault_01"		"0.000000"
+			"fl_smartdefault_02"		"0.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"econst_7"
+		{
+			"i_envconstidx"		"15"
+			"i_normregister"		"10"
+			"i_econstsize"		"1"
+			"i_smartcomps"		"2"
+			"sz_smartname"		"envmap_strength"
+			"fl_smartdefault_00"		"1.000000"
+			"fl_smartdefault_01"		"1.000000"
+			"fl_smartdefault_02"		"1.000000"
+			"fl_smartdefault_03"		"0.000000"
+		}
+		"texsamp_0"
+		{
+			"sz_param"		"specmap"
+			"sz_fallback"		"white"
+			"i_sampidx"		"0"
+			"i_texmode"		"0"
+			"i_cubemap"		"0"
+			"i_srgb"		"0"
+		}
+		"texsamp_1"
+		{
+			"sz_param"		"flowmap"
+			"sz_fallback"		"white"
+			"i_sampidx"		"1"
+			"i_texmode"		"0"
+			"i_cubemap"		"0"
+			"i_srgb"		"0"
+		}
+		"texsamp_2"
+		{
+			"sz_param"		"warptexture"
+			"sz_fallback"		"white"
+			"i_sampidx"		"2"
+			"i_texmode"		"0"
+			"i_cubemap"		"0"
+			"i_srgb"		"0"
+		}
+		"texsamp_3"
+		{
+			"sz_param"		"Bumpmap_variationtexture"
+			"sz_fallback"		"dev\flat_normal"
+			"i_sampidx"		"3"
+			"i_texmode"		"0"
+			"i_cubemap"		"0"
+			"i_srgb"		"0"
+		}
+		"texsamp_4"
+		{
+			"sz_fallback"		"dev\flat_normal"
+			"i_sampidx"		"4"
+			"i_texmode"		"2"
+			"i_cubemap"		"0"
+			"i_srgb"		"0"
+		}
+		"texsamp_5"
+		{
+			"sz_fallback"		"white"
+			"i_sampidx"		"5"
+			"i_texmode"		"6"
+			"i_cubemap"		"1"
+			"i_srgb"		"0"
+		}
+		"texsamp_6"
+		{
+			"sz_fallback"		"white"
+			"i_sampidx"		"6"
+			"i_texmode"		"5"
+			"i_cubemap"		"0"
+			"i_srgb"		"0"
+		}
+		"i_numdcombos"		"1"
+	}
+}

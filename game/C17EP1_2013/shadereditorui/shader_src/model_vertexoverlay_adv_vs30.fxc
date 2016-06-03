@@ -1,0 +1,108 @@
+// *********************************
+// ** auto generated vertexshader **
+// *********************************
+
+// Combos
+// DYNAMIC: "MORPHING"		"0..1"
+// DYNAMIC: "SKINNING"		"0..1"
+// STATIC: "FLASHLIGHT"		"0..1"
+
+// Includes
+#include "common_vs_fxc.h"
+
+
+// Samplers
+sampler2D morphSampler		: register( D3DVERTEXTEXTURESAMPLER0, s0 );
+
+// Constants
+const float3 _g_VecOrig		: register( c48 );
+const float4x4 g_cFlashlightWorldToTexture		: register( c49 );
+#ifdef SHADER_MODEL_VS_3_0
+const float3 g_cMorphTargetTextureDim		: register( SHADER_SPECIFIC_CONST_10 );
+const float4 g_cMorphSubrect				: register( SHADER_SPECIFIC_CONST_11 );
+#endif
+
+// Semantic structures
+struct VS_INPUT
+{
+	float3 vPos					:	POSITION;
+	float3 vFlexDelta			:	POSITION1;
+	float3 vFlexDelta_Normal	:	NORMAL1;
+	float4 vBoneWeights			:	BLENDWEIGHT;
+	float4 vBoneIndices			:	BLENDINDICES;
+	float3 vNormal				:	NORMAL;
+	float4 vTangent_S			:	TANGENT;
+	float2 vTexCoord_0			:	TEXCOORD0;
+#ifdef SHADER_MODEL_VS_3_0
+	float vVertexID			: POSITION2;
+#endif
+};
+
+struct VS_OUTPUT
+{
+	float4 vProjPos				:	POSITION;
+	float2 vTexCoord_0			:	TEXCOORD0;
+	float3 vTexCoord_1			:	TEXCOORD1;
+	float3 vTexCoord_2			:	TEXCOORD2;
+	float4 vTexCoord_3			:	TEXCOORD3;
+	float4 vTexCoord_4			:	TEXCOORD4;
+	float3 vTexCoord_5			:	TEXCOORD5;
+	float3 vTexCoord_6			:	TEXCOORD6;
+	float3 vTexCoord_7			:	TEXCOORD7;
+	float4 vColor_0				:	COLOR0;
+};
+
+// Entry point
+VS_OUTPUT main( const VS_INPUT In )
+{
+	VS_OUTPUT Out;
+	float3 _var0 = In.vTangent_S.xyz;
+	float _var1 = In.vTangent_S.w;
+	float4 _var2 = float4( 0.000000, 0.000000, 0.000000, 0.000000 );
+	float3 _var3 = (float3)0;
+	float3 _var4 = (float3)0;
+#if !defined( SHADER_MODEL_VS_3_0 ) || !MORPHING
+	ApplyMorph( In.vFlexDelta, In.vFlexDelta_Normal,
+			In.vPos, _var3,
+			In.vNormal, _var4,
+			_var0, _var0 );
+#else
+	ApplyMorph( morphSampler, g_cMorphTargetTextureDim, g_cMorphSubrect,
+			In.vVertexID, float3( 0, 0, 0 ),
+			In.vPos, _var3,
+			In.vNormal, _var4,
+			_var0, _var0 );
+#endif
+	float4 _var5 = float4( _var0, _var1 );
+	float3 _var6 = (float3)0;
+	float3 _var7 = (float3)0;
+	float3 _var8 = (float3)0;
+	float3 _var9 = (float3)0;
+	SkinPositionNormalAndTangentSpace( SKINNING, float4( _var3, 1 ), _var4, _var5,
+			In.vBoneWeights, In.vBoneIndices,
+			_var6, _var7, _var8, _var9 );
+	float4 _var10 = mul( float4(_var6.xyz,1), cViewProj );
+	_var7 = normalize( _var7 );
+	float4 _var11 = float4( GetVertexAttenForLight( _var6, 0 ),
+			GetVertexAttenForLight( _var6, 1 ),
+			GetVertexAttenForLight( _var6, 2 ),
+			GetVertexAttenForLight( _var6, 3 ) );
+	_var8 = normalize( _var8 );
+	_var9 = normalize( _var9 );
+	float3 _var12 = _var6 - _g_VecOrig;
+#if ( FLASHLIGHT == 1 )
+		float4 _var13 = mul( float4(_var6.xyz,1), g_cFlashlightWorldToTexture );
+		_var2 = _var13;
+#endif
+	Out.vProjPos = _var10;
+	Out.vTexCoord_0 = In.vTexCoord_0;
+	Out.vTexCoord_1 = _var7;
+	Out.vTexCoord_2 = _var6;
+	Out.vTexCoord_3 = _var11;
+	Out.vTexCoord_4 = _var10;
+	Out.vTexCoord_5 = _var8;
+	Out.vTexCoord_6 = _var9;
+	Out.vTexCoord_7 = _var12;
+	Out.vColor_0 = _var2;
+	return Out;
+}
