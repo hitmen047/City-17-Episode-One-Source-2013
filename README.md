@@ -1,4 +1,4 @@
-SOURCE 1 SDK LICENSE
+               SOURCE 1 SDK LICENSE
 
 Source SDK Copyright(c) Valve Corp.  
 
